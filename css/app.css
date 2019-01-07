@@ -1,0 +1,221 @@
+/*-------------------------------------------
+/
+/	LOGIN
+/
+---------------------------------------------*/
+.login-screen-content
+{
+	background-image: url("../images/login/login_bg.png");
+	background-repeat: no-repeat;
+	background-size: 300px;
+	background-position: bottom right;
+}
+.md .login-screen-title
+{
+	font-size: 1.5em;
+}
+.item-input-wrap input,.item-input-wrap textarea
+{
+	border: 1px solid #d3d8dc;
+	padding-left: 10px;
+}
+.login_button_holder
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login_button_holder .button.button-fill
+{
+	background-color: #07074e;
+}
+.estado_civil
+{
+	padding-left: 16px;
+}
+.md .list .item-inner::after
+{
+	background-color: transparent;
+}
+/*-------------------------------------------
+/
+/	HOME
+/
+---------------------------------------------*/
+.home_content
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.brand_logo
+{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	text-align: center;
+}
+.brand_logo img
+{
+	width: 180px;
+}
+.home_buttons
+{
+	text-align: center;
+	font-size: 1.5em;
+	width: 100%;
+}
+.home_buttons .item-icon
+{
+	font-size: 4em;
+}
+.button_option
+{
+	background-color: #535087;
+	margin-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.button_option a
+{
+	color: #e0c300;
+}
+.home_footer
+{
+	font-size: 1.4em;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+/*-------------------------------------------
+/
+/	FORM
+/
+---------------------------------------------*/
+.form_checkbox
+{
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 24px;
+}
+.form_save_button
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.form_save_button button
+{
+	color: white!important;
+}
+.md .navbar
+{
+	background-color: #535087;
+}
+.md .radio input[type="radio"]:checked ~ .icon-radio, .md label.item-radio input[type="radio"]:checked ~ * .icon-radio, .md label.item-radio input[type="radio"]:checked ~ .icon-radio
+{
+	border-color: #535087;
+}
+.md .radio input[type="radio"]:checked ~ .icon-radio, .md label.item-radio input[type="radio"]:checked ~ * .icon-radio, .md label.item-radio input[type="radio"]:checked ~ .icon-radio::after
+{
+	background-color: #535087;
+}
+/*-------------------------------------------
+/
+/	DIRECTORIO
+/
+---------------------------------------------*/
+.profile
+{
+	color:#666666;
+}
+.profile_image
+{
+	text-align: center;
+}
+.profile_image img
+{
+	width: 150px;
+}
+.profile_info
+{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile_name
+{
+	margin-bottom: 10px;
+}
+.profile_name .text
+{
+	font-size: 1.5em;
+}
+.profile_option
+{
+	display: flex;
+	align-items: center;
+}
+.profile_option .text
+{
+	padding-right: 10px;
+}
+.profile_option input
+{
+	width: 80px!important;
+}
+.profile_info_right
+{
+	display: flex;
+	justify-content: right;
+	align-items: center;
+}
+.profile_arrow
+{
+	background-color: #07074e;
+	border-radius: 20px;
+	height: 40px;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.profile_buttons
+{
+	width: 300px;
+	display: flex;
+	float: right;
+}
+.profile_buttons button
+{
+	margin-right: 10px;
+	background-color: #ededed!important;
+	color: black!important;
+}
+/*-------------------------------------------
+/
+/	DIRECTORIO-PROFILE-ACTIVE
+/
+---------------------------------------------*/
+.profile.active
+{
+	background-color: #e0c300;
+	color: white;
+}
+.profile.active input[type="text"]
+{
+	color: white!important;
+}
+.profile.active .profile_arrow
+{
+	-webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.profile.active .accordion-item-content
+{
+	height: 28px;
+}

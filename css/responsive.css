@@ -1,0 +1,45 @@
+/* Extra Small mobile */
+@media (max-width: 399px){
+	body {/*background-color: purple;*/}
+	/*-------------------------------------------
+	/
+	/	DIRECTORIO
+	/
+	/---------------------------------------------*/
+	.profile_buttons
+	{
+		width: 255px;
+	}
+}
+/* Small mobile */
+@media (min-width: 400px){
+	body{/*background-color: red;*/}
+}
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+	body{/*background-color: green;*/}
+}
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+	body{/*background-color: blue;*/}
+}
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+	body{/*background-color: pink;*/}
+}
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+	body{/*background-color: black;*/}
+}
+/* Mid HD */ 
+@media (min-width: 1720px){
+	body{/*background-color: brown;*/}
+}
+/* Larger than Desktop UHD */ 
+@media (min-width:1920px){
+	body{/*background-color: orange;*/}
+}
+/* Larger than Desktop RUHD */ 
+@media (min-width:2400px){
+	body{/*background-color: yellow;*/}
+}

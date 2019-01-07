@@ -1,0 +1,578 @@
+<div class="page" data-name="form">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Regresar</span>
+        </a>
+      </div>
+      <div id="form_title" class="title">Registro</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">Ingresa la información completa</div>
+    <div class="list no-hairlines-md">
+      <ul>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="nombres" placeholder="Nombres" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="apellidos" placeholder="Apellidos" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="cedula" placeholder="Número de Cédula" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" placeholder="Fecha de Nacimiento" readonly="readonly" id="fecha_nacimiento"/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="nombre_carnet" placeholder="Nombre del Carnet" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="nombre_familia" placeholder="Nombre de la Familia" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="ciudad" placeholder="Ciudad" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="canton" placeholder="Cantón" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="parroquia" placeholder="Parroquia" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="barrio" placeholder="Barrio/Ciudadela" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="sector" placeholder="Sector" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="align-top">
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <textarea name="direccion" placeholder="Dirección exacta" required validate></textarea>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-20 col-100">Estado civil</div>
+            <div class="tablet-80 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Soltero</div>
+                  </div>
+                  <input type="radio" name="estado_civil" value="Soltero" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Casado</div>
+                  </div>
+                  <input type="radio" name="estado_civil" value="Casado"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="row">
+                <div class="item-title item-label col-80">Nº de hijos</div>
+                <div class="item-input-wrap col-20">
+                  <input type="text" name="numero_hijos"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="estado_civil">
+            <div class="item-title item-label">¿Posee alguna discapacidad?</div>
+            <div class="row">
+              <label class="item-radio item-content tablet-25 col-100">
+                <div class="item-inner">
+                  <div class="item-title item-label">Sí</div>
+                </div>
+                <input type="radio" name="discapacidad" value="si" checked="checked"/>
+                <i class="icon icon-radio"></i>
+              </label>
+              <label class="item-radio item-content tablet-25 col-100">
+                <div class="item-inner">
+                  <div class="item-title item-label">No</div>
+                </div>
+                <input type="radio" name="discapacidad" value="no"/>
+                <i class="icon icon-radio"></i>
+              </label>
+              <div class="item-content item-input tablet-50 col-100">
+                <div class="item-inner">
+                  <div class="item-input-wrap">
+                    <input type="text" name="discapacidad" placeholder="Discapacidad"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="ocupacion" placeholder="Ocupación" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="profesion" placeholder="Profesión" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner row">
+              <div class="item-title item-label col-100">Nivel de escolaridad</div>
+              <div class="col-100">
+                <select id="nivel_escolaridad">
+                  <option value="primaria-incompleta">Primaria incompleta</option>
+                  <option value="primaria-completa">Primaria completa</option>
+                  <option value="secundaria-incompleta">Secundaria incompleta</option>
+                  <option value="bachiller">Bachiller</option>
+                  <option value="universidad-incompleta">Universidad incompleta</option>
+                  <option value="bachiluniversidad-completaler">Universidad completa</option>
+                </select> 
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="capacitacion" placeholder="Capacitación que desea recibir" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Recibe algún bono del gobierno?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="bono_gobierno" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="bono_gobierno" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Recibe algún bono del municipio?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="bono_municipio" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="bono_municipio" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">Recibe Bono Solidario</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="bono_solidario" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="bono_solidario" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="telefono_convencional" placeholder="Teléfono convencional" validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="telefono_celular" placeholder="Teléfono celular" validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="telefono_compania" placeholder="Compañía celular" validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Tiene Whatsapp?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="tiene_whatsapp" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="tiene_whatsapp" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="numero_whatsapp" placeholder="Número Whatsapp"/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Tiene Facebook?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="tiene_facebook" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="tiene_facebook" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="user_facebook" placeholder="User de Facebook"/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Tiene Instagram?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="tiene_instagram" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="tiene_instagram" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="user_instagram" placeholder="User de Instagram"/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Tiene Twitter?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="tiene_twitter" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="tiene_twitter" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="user_twitter" placeholder="User de Twitter"/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="email" name="email" placeholder="Correo electrónico" required validate/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Posee casa propia?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="tiene_casa_propia" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="tiene_casa_propia" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row estado_civil">
+            <div class="item-title item-label tablet-25 col-100">¿Posee vehículo?</div>
+            <div class="tablet-75 col-100">
+              <div class="row">
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Sí</div>
+                  </div>
+                  <input type="radio" name="tiene_vehiculo" value="si" checked="checked"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+                <label class="item-radio item-content tablet-50 col-100">
+                  <div class="item-inner">
+                    <div class="item-title item-label">No</div>
+                  </div>
+                  <input type="radio" name="tiene_vehiculo" value="no"/>
+                  <i class="icon icon-radio"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="placa" placeholder="Placa del vehículo"/>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-label estado_civil">¿Que otro beneficio social le agradaría que el Municipio 2019 le otorgue?</div>
+          <div>
+            <label class="item-checkbox item-content">
+              <div class="item-inner row">
+                <div class="col-80">
+                  <!-- Checkbox Title -->
+                  <div class="item-label">Seguro de salud con atención médica y medicina gratuita</div>
+                </div>
+                <div class="col-20 form_checkbox">
+                  <!-- Checkbox input -->
+                  <input type="checkbox"/>
+                  <!-- Checkbox icon -->
+                  <i class="icon icon-checkbox"></i>   
+                </div>     
+              </div>
+            </label>
+            <label class="item-checkbox item-content">
+              <div class="item-inner row">
+                <div class="col-80">
+                  <!-- Checkbox Title -->
+                  <div class="item-label">Créditos productivos a nivel agrícola</div>
+                </div>
+                <div class="col-20 form_checkbox">
+                  <!-- Checkbox input -->
+                  <input type="checkbox"/>
+                  <!-- Checkbox icon -->
+                  <i class="icon icon-checkbox"></i>
+                </div>     
+              </div>
+            </label>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Otro</div>
+                <div class="item-input-wrap">
+                  <textarea></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <input type="text" name="numero_contrato" placeholder="Número del contrato"/>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="row form_save_button">
+        <div>
+          <button class="col button button-big button_option">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
