@@ -45,7 +45,7 @@
           <div class="item-content item-input">
             <div class="item-inner">
               <div class="item-input-wrap">
-                <input type="text" placeholder="Fecha de Nacimiento" readonly="readonly" id="fecha_nacimiento"/>
+                <input type="text" placeholder="Fecha de Nacimiento" readonly="readonly" id="fecha_nacimiento" required validate/>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@
               <div class="row">
                 <div class="item-title item-label col-80">Nº de hijos</div>
                 <div class="item-input-wrap col-20">
-                  <input type="text" name="numero_hijos"/>
+                  <input type="text" name="numero_hijos" required validate/>
                 </div>
               </div>
             </div>
@@ -165,14 +165,14 @@
                 <div class="item-inner">
                   <div class="item-title item-label">Sí</div>
                 </div>
-                <input type="radio" name="discapacidad" value="si" checked="checked"/>
+                <input id="discapacidad_si" type="radio" name="discapacidad" value="si" checked="checked"/>
                 <i class="icon icon-radio"></i>
               </label>
               <label class="item-radio item-content tablet-25 col-100">
                 <div class="item-inner">
                   <div class="item-title item-label">No</div>
                 </div>
-                <input type="radio" name="discapacidad" value="no"/>
+                <input id="discapacidad_no" type="radio" name="discapacidad" value="no"/>
                 <i class="icon icon-radio"></i>
               </label>
               <div class="item-content item-input tablet-50 col-100">
@@ -302,7 +302,7 @@
           <div class="item-content item-input">
             <div class="item-inner">
               <div class="item-input-wrap">
-                <input type="text" name="telefono_convencional" placeholder="Teléfono convencional" validate/>
+                <input type="text" name="telefono_convencional" placeholder="Teléfono convencional"/>
               </div>
             </div>
           </div>
@@ -311,7 +311,7 @@
           <div class="item-content item-input">
             <div class="item-inner">
               <div class="item-input-wrap">
-                <input type="text" name="telefono_celular" placeholder="Teléfono celular" validate/>
+                <input type="text" name="telefono_celular" placeholder="Teléfono celular"/>
               </div>
             </div>
           </div>
@@ -320,7 +320,7 @@
           <div class="item-content item-input">
             <div class="item-inner">
               <div class="item-input-wrap">
-                <input type="text" name="telefono_compania" placeholder="Compañía celular" validate/>
+                <input type="text" name="telefono_compania" placeholder="Compañía celular"/>
               </div>
             </div>
           </div>
@@ -562,7 +562,7 @@
           <div class="item-content item-input">
             <div class="item-inner">
               <div class="item-input-wrap">
-                <input type="text" name="numero_contrato" placeholder="Número del contrato"/>
+                <input type="text" name="numero_contrato" placeholder="Número del contrato" required validate/>
               </div>
             </div>
           </div>

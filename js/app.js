@@ -24,6 +24,14 @@ var app  = new Framework7({
   },
   // App routes
   routes: routes,
+  on: {
+    pageInit(page) {
+      //console.log(page)
+      if(page.name == "form")
+        create_birthdate_calendar();
+      //addRequire($$('[name="placa"]'));
+    }
+  }
 });
 
 // Init/Create main view
@@ -48,21 +56,39 @@ $$('#my-login-screen .login-button').on('click', function () {
 / Use: 
 / Description: 
 /-----------------------------------------------------------------------------------------------------------------------*/
-app.onPageInit('directorio', function (page) {
-  // "page" variable contains all required information about loaded and initialized page
-  console.log(1);
-  create_birthdate_calendar();
-})
+$$('input[type=radio][name=discapacidad]').change(function() {
+    console.log(3);
+    if (this.value == 'si') {
+        addRequire(this);
+    }
+    else if (this.value == 'no') {
+        removeRequire(this);
+    }
+});
 
 /*----------------------------------------------------------------------------------------------------------------------
-/ Name:  
-/ Use: 
-/ Description: 
+/ Name:  create_birthdate_calendar
+/ Use: create_birthdate_calendar();
+/ Description: Setea el input del calendario para la fecha de nacimiento
 /-----------------------------------------------------------------------------------------------------------------------*/
 function create_birthdate_calendar()
 {
-  console.log(1);
   var calendarDefault = app.calendar.create({
     inputEl: '#fecha_nacimiento',
   });
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name:  create_birthdate_calendar
+/ Use: create_birthdate_calendar();
+/ Description: Setea el input del calendario para la fecha de nacimiento
+/-----------------------------------------------------------------------------------------------------------------------*/
+function addRequire(element)
+{
+  element.attr('required','true');
+  element.attr('validate','true');
+}
+function removeRequire(element)
+{
+  element.removeAttr('required');
+  element.removeAttr('validate');
 }
