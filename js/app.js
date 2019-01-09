@@ -28,8 +28,7 @@ var app  = new Framework7({
     pageInit(page) {
       //console.log(page)
       if(page.name == "form")
-        create_birthdate_calendar();
-      //addRequire($$('[name="placa"]'));
+        setFormPage();
     }
   }
 });
@@ -52,20 +51,57 @@ $$('#my-login-screen .login-button').on('click', function () {
 });
 
 /*----------------------------------------------------------------------------------------------------------------------
-/ Name:  
-/ Use: 
-/ Description: 
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
 /-----------------------------------------------------------------------------------------------------------------------*/
-$$('input[type=radio][name=discapacidad]').change(function() {
-    console.log(3);
-    if (this.value == 'si') {
-        addRequire(this);
-    }
-    else if (this.value == 'no') {
-        removeRequire(this);
-    }
-});
-
+function setFormPage()
+{
+  //Calendario Fecha de nacimiento
+  create_birthdate_calendar();
+  //Input de discapacidad
+  $$('input[type=radio][name=discapacidad]').change(function() {
+      if (this.value == 'si')
+          addRequire($$('input[type=text][name=discapacidad]'));
+      else if (this.value == 'no')
+          removeRequire($$('input[type=text][name=discapacidad]'));
+  });
+  //Input de whatsapp
+  $$('input[type=radio][name=tiene_whatsapp]').change(function() {
+      if (this.value == 'si')
+          addRequire($$('input[type=text][name=numero_whatsapp]'));
+      else if (this.value == 'no')
+          removeRequire($$('input[type=text][name=numero_whatsapp]'));
+  });
+  //Input de Facebook
+  $$('input[type=radio][name=tiene_facebook]').change(function() {
+      if (this.value == 'si')
+          addRequire($$('input[type=text][name=user_facebook]'));
+      else if (this.value == 'no')
+          removeRequire($$('input[type=text][name=user_facebook]'));
+  });
+  //Input de Instagram
+  $$('input[type=radio][name=tiene_instagram]').change(function() {
+      if (this.value == 'si')
+          addRequire($$('input[type=text][name=user_instagram]'));
+      else if (this.value == 'no')
+          removeRequire($$('input[type=text][name=user_instagram]'));
+  });
+  //Input de Twitter
+  $$('input[type=radio][name=tiene_twitter]').change(function() {
+      if (this.value == 'si')
+          addRequire($$('input[type=text][name=user_twitter]'));
+      else if (this.value == 'no')
+          removeRequire($$('input[type=text][name=user_twitter]'));
+  });
+  //Input de Vehículo
+  $$('input[type=radio][name=tiene_vehiculo]').change(function() {
+      if (this.value == 'si')
+          addRequire($$('input[type=text][name=placa]'));
+      else if (this.value == 'no')
+          removeRequire($$('input[type=text][name=placa]'));
+  });
+}
 /*----------------------------------------------------------------------------------------------------------------------
 / Name:  create_birthdate_calendar
 / Use: create_birthdate_calendar();
@@ -78,17 +114,26 @@ function create_birthdate_calendar()
   });
 }
 /*----------------------------------------------------------------------------------------------------------------------
-/ Name:  create_birthdate_calendar
-/ Use: create_birthdate_calendar();
-/ Description: Setea el input del calendario para la fecha de nacimiento
+/ Name: addRequire
+/ Use: addRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Agrega el require al input dado
 /-----------------------------------------------------------------------------------------------------------------------*/
 function addRequire(element)
 {
   element.attr('required','true');
   element.attr('validate','true');
 }
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
 function removeRequire(element)
 {
   element.removeAttr('required');
   element.removeAttr('validate');
+  element.removeClass('input-invalid');
+  element.parents('.item-content.item-input').removeClass('item-input-with-error-message');
+  element.parents('.item-content.item-input').removeClass('item-input-invalid');
+  element.parent('.item-input-wrap').find('.item-input-error-message').remove();
 }
