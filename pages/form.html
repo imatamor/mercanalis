@@ -45,7 +45,7 @@
           <div class="item-content item-input">
             <div class="item-inner">
               <div class="item-input-wrap">
-                <input type="text" placeholder="Fecha de Nacimiento" readonly="readonly" id="fecha_nacimiento" required validate/>
+                <input type="text" placeholder="Fecha de Nacimiento" readonly="readonly" name="fecha_nacimiento" id="fecha_nacimiento" required validate/>
               </div>
             </div>
           </div>
@@ -269,29 +269,6 @@
                     <div class="item-title item-label">No</div>
                   </div>
                   <input type="radio" name="bono_municipio" value="no"/>
-                  <i class="icon icon-radio"></i>
-                </label>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="row estado_civil">
-            <div class="item-title item-label tablet-25 col-100">Recibe Bono Solidario</div>
-            <div class="tablet-75 col-100">
-              <div class="row">
-                <label class="item-radio item-content tablet-50 col-100">
-                  <div class="item-inner">
-                    <div class="item-title item-label">Sí</div>
-                  </div>
-                  <input type="radio" name="bono_solidario" value="si" checked="checked"/>
-                  <i class="icon icon-radio"></i>
-                </label>
-                <label class="item-radio item-content tablet-50 col-100">
-                  <div class="item-inner">
-                    <div class="item-title item-label">No</div>
-                  </div>
-                  <input type="radio" name="bono_solidario" value="no"/>
                   <i class="icon icon-radio"></i>
                 </label>
               </div>
@@ -528,7 +505,7 @@
                 </div>
                 <div class="col-20 form_checkbox">
                   <!-- Checkbox input -->
-                  <input type="checkbox"/>
+                  <input type="checkbox" name="seguro_medico" />
                   <!-- Checkbox icon -->
                   <i class="icon icon-checkbox"></i>   
                 </div>     
@@ -542,7 +519,7 @@
                 </div>
                 <div class="col-20 form_checkbox">
                   <!-- Checkbox input -->
-                  <input type="checkbox"/>
+                  <input type="checkbox" name="credito_agricola" />
                   <!-- Checkbox icon -->
                   <i class="icon icon-checkbox"></i>
                 </div>     
@@ -552,7 +529,7 @@
               <div class="item-inner">
                 <div class="item-title item-label">Otro</div>
                 <div class="item-input-wrap">
-                  <textarea></textarea>
+                  <textarea name="otro"></textarea>
                 </div>
               </div>
             </div>
@@ -570,7 +547,7 @@
       </ul>
       <div class="row form_save_button">
         <div>
-          <button class="col button button-big button_option">Guardar</button>
+          <button id="form_save_button" class="col button button-big button_option">Guardar</button>
         </div>
       </div>
     </div>

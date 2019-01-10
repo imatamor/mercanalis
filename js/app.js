@@ -55,6 +55,58 @@ $$('#my-login-screen .login-button').on('click', function () {
 / Use: setFormPage();
 / Description: Inicializa todos los inputs del form que lo requieran.
 /-----------------------------------------------------------------------------------------------------------------------*/
+function validateForm()
+{
+
+var nombre                  = $$('input[type=text][name=nombres]').val();
+var apellido                = $$('input[type=text][name=apellidos]').val();
+var cedula                  = $$('input[type=text][name=cedula]').val();
+var fecha_nacimiento        = $$('input[type=text][name=fecha_nacimiento]').val();
+var nombre_carnet           = $$('input[type=text][name=nombre_carnet]').val();
+var nombre_familia          = $$('input[type=text][name=nombre_familia]').val();
+var ciudad                  = $$('input[type=text][name=ciudad]').val();
+var canton                  = $$('input[type=text][name=canton]').val();
+var parroquia               = $$('input[type=text][name=parroquia]').val();
+var barrio                  = $$('input[type=text][name=barrio]').val();
+var sector                  = $$('input[type=text][name=sector]').val();
+var direccion               = $$('textarea[name=nombres]').val();
+var estado_civil            = $$('input[type=radio][name=estado_civil]:checked').val();
+var numero_hijos            = $$('input[type=text][name=numero_hijos]').val();
+var tiene_discapacidad      = $$('input[type=radio][name=discapacidad]:checked').val();
+var discapacidad            = $$('input[type=text][name=discapacidad]').val();
+var ocupacion               = $$('input[type=text][name=ocupacion]').val();
+var profesion               = $$('input[type=text][name=profesion]').val();
+var nivel_escolaridad       = $$('#nivel_escolaridad').val();
+var capacitacion_deseada    = $$('input[type=text][name=capacitacion]').val();
+var tiene_bono_gobierno     = $$('input[type=radio][name=bono_gobierno]:checked').val();
+var tiene_bono_municipio    = $$('input[type=radio][name=bono_municipio]:checked').val();
+var telefono_convencional   = $$('input[type=text][name=telefono_convencional]').val();
+var telefono_celular        = $$('input[type=text][name=telefono_celular]').val();
+var telefono_compania       = $$('input[type=text][name=telefono_compania]').val();
+var tiene_whatsapp          = $$('input[type=radio][name=tiene_whatsapp]:checked').val();
+var whatsapp                = $$('input[type=text][name=numero_whatsapp]').val();
+var tiene_facebook          = $$('input[type=radio][name=tiene_facebook]:checked').val();
+var facebook                = $$('input[type=text][name=user_facebook]').val();
+var tiene_instagram         = $$('input[type=radio][name=tiene_instagram]:checked').val();
+var instagram               = $$('input[type=text][name=user_instagram]').val();
+var tiene_twitter           = $$('input[type=radio][name=tiene_twitter]:checked').val();
+var twitter                 = $$('input[type=text][name=user_twitter]').val();
+var correo_electronico      = $$('input[type=text][name=email]').val();
+var tiene_casa_propia       = $$('input[type=radio][name=tiene_casa_propia]:checked').val();
+var tiene_vehiculo          = $$('input[type=radio][name=tiene_vehiculo]:checked').val();
+var placa                   = $$('input[type=text][name=placa]').val();
+var seguro_medico           = $$('input[type=checkbox][name=seguro_medico]').val();
+var credito_agricola        = $$('input[type=checkbox][name=credito_agricola]').val();
+var otros                   = $$('textarea[name=otro]').val();
+var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
+var image                   = $$('input[type=text][name=nombres]').val();
+  
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
 function setFormPage()
 {
   //Calendario Fecha de nacimiento
@@ -100,6 +152,10 @@ function setFormPage()
           addRequire($$('input[type=text][name=placa]'));
       else if (this.value == 'no')
           removeRequire($$('input[type=text][name=placa]'));
+  });
+  //Guardar Registro
+  $$('#form_save_button').on('click', function () {
+    validateForm();
   });
 }
 /*----------------------------------------------------------------------------------------------------------------------
