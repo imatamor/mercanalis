@@ -1,6 +1,6 @@
 // Dom7
 var $$ = Dom7;
-//localStorage.setItem('usuario', 'Esme');
+localStorage.setItem('usuario', 'Esme');
 
 // Framework7 App main instance
 var app  = new Framework7({
