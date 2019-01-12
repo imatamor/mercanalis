@@ -17,7 +17,7 @@
       Hardeep Shoker
   </author>
 
-  <plugin name="Camera" value="org.apache.cordova.CameraLauncher" />
+  <!--plugin name="Camera" value="org.apache.cordova.CameraLauncher" /-->
   
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
