@@ -5,7 +5,7 @@ include('db.php');
 $db 		= new db();
 $sql 		= "SELECT * FROM usuario where usuario = '".$_REQUEST['usuario']."' AND password = '".$_REQUEST['password']."' AND activo = '1';";
 $response = $db->Select($sql);
-//$response = $user_data;
+
 header("Content-Type: application/json",true);
 echo json_encode(utf8_converter($response));
 

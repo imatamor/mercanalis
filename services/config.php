@@ -1,6 +1,6 @@
 <?php
 $config['host'] = "localhost";
-$config['database'] = "mercanalis_app";
+$config['database'] = "mercanalis";
 $config['username'] = "root";
 $config['password'] = "";
 

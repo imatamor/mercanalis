@@ -27,6 +27,8 @@ var app  = new Framework7({
   on: {
     pageInit(page) {
       //console.log(page)
+      if(page.name == "home")
+        //setHomePage();
       if(page.name == "form")
         setFormPage();
     }
@@ -40,14 +42,46 @@ var mainView = app.views.create('.view-main', {
 
 // Login Screen Demo
 $$('#my-login-screen .login-button').on('click', function () {
-  var username = $$('#my-login-screen [name="username"]').val();
+
+  var usuario = $$('#my-login-screen [name="username"]').val();
   var password = $$('#my-login-screen [name="password"]').val();
+  var valid = true;
 
-  // Close login screen
-  app.loginScreen.close('#my-login-screen');
+  /*if($$('input').hasClass("input-invalid"))
+    alert($$('input:empty').length);*/
 
-  // Alert username and password
-  app.dialog.alert('Username: ' + username + '<br>Password: ' + password);
+  if(!usuario)
+    valid = false;
+  else if(!password)
+    valid = false;
+  if(valid)
+  {
+    var data = {
+      'usuario'   : usuario,
+      'password'  : password
+    };
+    $('.feedback_login').html("Espere un momento por favor...");
+    $('.feedback_section_login').show();
+    $.post("services/login.php", data)
+    .done(function(submitResponse) 
+    {
+      //console.log(submitResponse);
+      if(submitResponse.length == 0)
+        $('.feedback_login').html("Usuario o Contraseña invalidos");
+      else
+        $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
+      // Close login screen
+      app.loginScreen.close('#my-login-screen');
+    })
+    .fail( function(xhr, textStatus, errorThrown) {
+    //error
+      $('.feedback_login').html(submitResponse);
+    })
+  }
+  else
+  {
+    $('.feedback_login').html("Debes llenar todos los campos para continuar");
+  }
 });
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -101,6 +135,15 @@ var otros                   = $$('textarea[name=otro]').val();
 var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
 var image                   = $$('input[type=text][name=nombres]').val();
   
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
+function setHomePage()
+{
+  $('.feedback_section_login').hide();
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage

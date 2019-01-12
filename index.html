@@ -86,14 +86,14 @@
                 <li class="item-content item-input">
                   <div class="item-inner">
                     <div class="item-input-wrap">
-                      <input type="text" name="username" placeholder="Usuario">
+                      <input type="text" name="username" placeholder="Usuario" required validate>
                     </div>
                   </div>
                 </li>
                 <li class="item-content item-input">
                   <div class="item-inner">
                     <div class="item-input-wrap">
-                      <input type="password" name="password" placeholder="Contraseña">
+                      <input type="password" name="password" placeholder="Contraseña" required validate>
                     </div>
                   </div>
                 </li>
@@ -103,6 +103,9 @@
               <div>
                 <button class="col button button-fill login-button">Entrar</button>
               </div>
+            </div>
+            <div class="row feedback_section_login">
+              <span class="feedback_login"></span>
             </div>
           </div>
         </div>
