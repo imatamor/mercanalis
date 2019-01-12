@@ -11,6 +11,14 @@
     </div>
   </div>
   <div class="page-content">
+    <div>
+        <a href="#" class="button button-fill" onclick="capturePhotoWithFile();">Take A Picture</a> <br>
+        <a href="#" class="button button-fill" onclick="getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);">Select from Gallery</a><br>
+        <div id="uplimgcontainer">
+          <img style="display:none; max-width:100%" id="largeImage" src="" />
+        </div>
+        <div id='photocap'></div>
+    </div>
     <div class="block-title">Ingresa la información completa</div>
     <div class="list no-hairlines-md">
       <ul>

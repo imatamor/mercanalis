@@ -13,10 +13,7 @@ var app  = new Framework7({
     pageInit(page) {
       //console.log(page)
       if(page.name == "home")
-      {
         login();
-        console.log(localStorage.getItem('usuario'));
-      } 
       if(page.name == "form")
         setFormPage();
     }
@@ -149,6 +146,9 @@ function setHomePage()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function setFormPage()
 {
+  //Camara
+  var pictureSource = navigator.camera.PictureSourceType;
+  var destinationType = navigator.camera.DestinationType;
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
@@ -232,4 +232,80 @@ function removeRequire(element)
   element.parents('.item-content.item-input').removeClass('item-input-with-error-message');
   element.parents('.item-content.item-input').removeClass('item-input-invalid');
   element.parent('.item-input-wrap').find('.item-input-error-message').remove();
+}
+
+
+
+
+
+
+
+
+
+
+
+function onPhotoFileSuccess(imageData) {
+  alert("onPhotoFileSuccess was called. imageData: "+imageData);
+  // Get image handle
+  console.log(JSON.stringify(imageData));
+
+  // Get image handle
+  //
+  var largeImage = document.getElementById('largeImage');
+  // Unhide image elements
+  //
+  largeImage.style.display = 'block';
+  document.getElementById('uploadpicbtn').style.display="block";
+  // Show the captured photo
+  // The inline CSS rules are used to resize the image
+  //
+  largeImage.src = imageData;
+  uploadimgdata=imageData;
+}
+// Called when a photo is successfully retrieved
+//
+function onPhotoURISuccess(imageURI) {
+  alert("onPhotoURISuccess was called. imageuri: "+imageURI);
+  // Uncomment to view the image file URI
+  // console.log(imageURI);
+  // Get image handle
+  //
+  var largeImage = document.getElementById('largeImage');
+  // Unhide image elements
+  //
+  largeImage.style.display = 'block';
+  document.getElementById('uploadpicbtn').style.display="block";
+  // Show the captured photo
+  // The inline CSS rules are used to resize the image
+  //
+
+//custom code to fix image uri
+  if (imageURI.substring(0,21)=="content://com.android") {
+    photo_split=imageURI.split("%3A");
+    imageURI="content://media/external/images/media/"+photo_split[1];
+  }
+
+  largeImage.src = imageURI;
+  document.getElementById('uploadpicbtn').style.display="block";
+
+uploadimgdata=imageURI;
+}
+
+function capturePhotoWithFile() {
+    navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+}
+
+// A button will call this function
+//
+function getPhoto(source) {
+  alert("getphoto was called. source= "+source);
+  // Retrieve image file location from specified source
+  navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+    destinationType: destinationType.FILE_URI,
+    sourceType: source });
+}
+// Called if something bad happens.
+//
+function onFail(message) {
+  alert('Failed because: ' + message);
 }
