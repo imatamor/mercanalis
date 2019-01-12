@@ -7,28 +7,16 @@ var app  = new Framework7({
   id: 'io.framework7.testapp', // App bundle ID
   name: 'Framework7', // App name
   theme: 'auto', // Automatic theme detection
-  // App root data
-  data: function () {
-    return {
-      user: {
-        firstName: 'John',
-        lastName: 'Doe',
-      },
-    };
-  },
-  // App root methods
-  methods: {
-    helloWorld: function () {
-      app.dialog.alert('Hello World!');
-    },
-  },
   // App routes
   routes: routes,
   on: {
     pageInit(page) {
       //console.log(page)
       if(page.name == "home")
-        //setHomePage();
+      {
+        login();
+        console.log(localStorage.getItem('usuario'));
+      } 
       if(page.name == "form")
         setFormPage();
     }
@@ -40,7 +28,6 @@ var mainView = app.views.create('.view-main', {
   url: '/'
 });
 
-// Login Screen Demo
 $$('#my-login-screen .login-button').on('click', function () {
 
   var usuario = $$('#my-login-screen [name="username"]').val();
@@ -70,6 +57,8 @@ $$('#my-login-screen .login-button').on('click', function () {
         $('.feedback_login').html("Usuario o Contraseña invalidos");
       else
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
+      var userData =[submitResponse[0].nombre,submitResponse[0].usuario];
+      localStorage.setItem('usuario', userData);
       // Close login screen
       app.loginScreen.close('#my-login-screen');
     })
@@ -83,6 +72,14 @@ $$('#my-login-screen .login-button').on('click', function () {
     $('.feedback_login').html("Debes llenar todos los campos para continuar");
   }
 });
+/**
+ * LOGIN OPEN LOGIN SCREEN
+ */
+function login(){
+  if(!localStorage.getItem('usuario'))
+    app.loginScreen.open('#my-login-screen', true);
+  
+}
 
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
