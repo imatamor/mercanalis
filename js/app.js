@@ -1,5 +1,6 @@
 // Dom7
 var $$ = Dom7;
+//localStorage.setItem('usuario', 'Esme');
 
 // Framework7 App main instance
 var app  = new Framework7({
@@ -27,6 +28,8 @@ var app  = new Framework7({
   on: {
     pageInit(page) {
       //console.log(page)
+      login();
+      
       if(page.name == "form")
         setFormPage();
     }
@@ -38,6 +41,8 @@ var mainView = app.views.create('.view-main', {
   url: '/'
 });
 
+
+/*
 // Login Screen Demo
 $$('#my-login-screen .login-button').on('click', function () {
   var username = $$('#my-login-screen [name="username"]').val();
@@ -49,6 +54,15 @@ $$('#my-login-screen .login-button').on('click', function () {
   // Alert username and password
   app.dialog.alert('Username: ' + username + '<br>Password: ' + password);
 });
+*/
+/**
+ * LOGIN OPEN LOGIN SCREEN
+ */
+function login(){
+  if(!localStorage.getItem('usuario'))
+    app.loginScreen.open('#my-login-screen', true);
+  
+}
 
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
