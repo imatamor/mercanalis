@@ -52,8 +52,8 @@ $$('#my-login-screen .login-button').on('click', function () {
     $.post("services/login.php", data)
     .done(function(submitResponse) 
     {
-      //console.log(submitResponse);
-      if(submitResponse.length == 0)
+      console.log(submitResponse);
+      if(submitResponse[0].valid == 0)
         $('.feedback_login').html("Usuario o Contraseña invalidos");
       else
       {
