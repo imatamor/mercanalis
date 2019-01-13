@@ -49,10 +49,10 @@ $$('#my-login-screen .login-button').on('click', function () {
     };
     $('.feedback_login').html("Espere un momento por favor...");
     $('.feedback_section_login').show();
-    $.post("services/login.php", data)
+    $.post("http://138.197.154.196/mercanalis/login.php", data)
     .done(function(submitResponse) 
     {
-      console.log(submitResponse);
+      //console.log(submitResponse);
       if(submitResponse[0].valid == 1)
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
@@ -89,6 +89,21 @@ function login(){
 / Description: Inicializa todos los inputs del form que lo requieran.
 /-----------------------------------------------------------------------------------------------------------------------*/
 function validateForm()
+{
+  var isValidForm = true;
+  $('.form_content').find(':input[required]:visible').each(function() {
+    if (!this.value.trim()) {
+      isValidForm = false;
+    }
+  });
+  return isValidForm;
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
+function saveElector()
 {
 
 var nombre                  = $$('input[type=text][name=nombres]').val();
