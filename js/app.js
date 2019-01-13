@@ -7,6 +7,13 @@ var app  = new Framework7({
   id: 'io.framework7.testapp', // App bundle ID
   name: 'Framework7', // App name
   theme: 'auto', // Automatic theme detection
+  precompileTemplates: false,
+  template7Pages: true,
+  // Specify Template7 data for pages
+  template7Data: {
+    // Another plain data object, used in "about" link in data-contextName object 
+    directorio: JSON.parse(localStorage.getItem('directorio') )
+  },
   // App routes
   routes: routes,
   on: {
@@ -27,6 +34,8 @@ var app  = new Framework7({
 var mainView = app.views.create('.view-main', {
   url: '/'
 });
+
+
 
 $$('#my-login-screen .login-button').on('click', function () {
 
@@ -80,6 +89,44 @@ function login(){
     app.loginScreen.open('#my-login-screen', true);
   
 }
+
+$$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
+  var virtualList = app.virtualList.create({
+    // List Element
+    el: '.virtual-list',
+    // Pass array with items
+    // items: items,
+    items: app.params.template7Data['directorio'],
+    // Custom search function for searchbar
+    searchAll: function (query, items) {
+      var found = [];
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].nombre.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+      }
+      return found; //return array with mathced indexes
+    },
+    // List item Template7 template
+    itemTemplate:
+    '<li class="profile accordion-item">'+
+      '<a href="" class="item-link item-content">'+
+        '<div class="item-inner">'+
+          //'<img src="images/elector/elector_profile.png" class="profile_image" width="25px">'+
+          '<i class="f7-icons">person</i>'+
+          '<div class="item-title profile_name">{{nombre}}  {{apellido}}</div>'+
+        '</div>'+
+      '</a>'+
+      '<div class="accordion-item-content">'+
+      '<div class="profile_option profile_edad"><span class="text">Edad</span><input type="text" name="profile_edad" value="31" readonly></div>'+
+      '<div class="profile_option profile_estado"><span class="text">Estado Civil</span><input type="text" name="profile_estado" value="Soltero" readonly></div>'+
+      '<div class="profile_option profile_hijos"><span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="2" readonly></div>'+
+      '</div>'+
+    '</li>',
+    // Item height
+    height: app.theme === 'ios' ? 63 : 73,
+  });
+})
+
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
