@@ -3,6 +3,7 @@ var $$ = Dom7;
 //Global Variables
 var pictureSource;
 var destinationType;
+var uploadimgdata;
 // Framework7 App main instance
 var app  = new Framework7({
   root: '#app', // App root element
@@ -151,6 +152,8 @@ function setFormPage()
   //Camara
   pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
+  $('#take_picture').click(capturePhotoWithFile);
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
@@ -235,17 +238,11 @@ function removeRequire(element)
   element.parents('.item-content.item-input').removeClass('item-input-invalid');
   element.parent('.item-input-wrap').find('.item-input-error-message').remove();
 }
-
-
-
-
-
-
-
-
-
-
-
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
 function onPhotoFileSuccess(imageData) {
   alert("onPhotoFileSuccess was called. imageData: "+imageData);
   // Get image handle
@@ -257,13 +254,17 @@ function onPhotoFileSuccess(imageData) {
   // Unhide image elements
   //
   largeImage.style.display = 'block';
-  document.getElementById('uploadpicbtn').style.display="block";
   // Show the captured photo
   // The inline CSS rules are used to resize the image
   //
-  largeImage.src = imageData;
-  uploadimgdata=imageData;
+  largeImage.src  = imageData;
+  uploadimgdata   = imageData;
 }
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
 // Called when a photo is successfully retrieved
 //
 function onPhotoURISuccess(imageURI) {
@@ -276,7 +277,6 @@ function onPhotoURISuccess(imageURI) {
   // Unhide image elements
   //
   largeImage.style.display = 'block';
-  document.getElementById('uploadpicbtn').style.display="block";
   // Show the captured photo
   // The inline CSS rules are used to resize the image
   //
@@ -287,16 +287,22 @@ function onPhotoURISuccess(imageURI) {
     imageURI="content://media/external/images/media/"+photo_split[1];
   }
 
-  largeImage.src = imageURI;
-  document.getElementById('uploadpicbtn').style.display="block";
-
-uploadimgdata=imageURI;
+  largeImage.src  = imageURI;
+  uploadimgdata   = imageURI;
 }
-
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
 function capturePhotoWithFile() {
     navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
 }
-
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
 // A button will call this function
 //
 function getPhoto(source) {
@@ -307,6 +313,11 @@ function getPhoto(source) {
     allowEdit: true,
     sourceType: source });
 }
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
 // Called if something bad happens.
 //
 function onFail(message) {
