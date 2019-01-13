@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.phonegap.example"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+<!-- versionCode is optional and Android only -->
+
+  <name>Mercanalis</name>
+
+  <description>
+      Registro de Electores
+  </description>
+
+  <author href="https://build.phonegap.com" email="support@phonegap.com">
+      Maruri Grey
+  </author>
+
+  <!--plugin name="Camera" value="org.apache.cordova.CameraLauncher" />
+  
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /-->
+  <content src="index.html" />
+  <plugin name="cordova-plugin-camera" spec="~2.3.1" />
+  <plugin name="cordova-plugin-media-capture" spec="~1.4.1" />
+  <plugin name="cordova-plugin-device" spec="~1.1.4" />
+  <plugin name="cordova-plugin-file" spec="~4.3.1" />
+  <plugin name="cordova-plugin-media" spec="~2.4.1" />
+  <plugin name="cordova-plugin-whitelist" spec="1" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+  <platform name="android">
+    <allow-intent href="market:*" />
+  </platform>
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+  </platform>
+  <engine name="android" spec="~6.1.2" />
+
+</widget>
