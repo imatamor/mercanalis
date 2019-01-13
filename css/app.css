@@ -99,6 +99,11 @@
 /	FORM
 /
 ---------------------------------------------*/
+#largeImage
+{
+	display:none; 
+	max-width:100%;
+}
 .form_checkbox
 {
 	display: flex;
