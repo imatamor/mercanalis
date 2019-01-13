@@ -53,9 +53,7 @@ $$('#my-login-screen .login-button').on('click', function () {
     .done(function(submitResponse) 
     {
       console.log(submitResponse);
-      if(submitResponse[0].valid == 0)
-        $('.feedback_login').html("Usuario o Contraseña invalidos");
-      else
+      if(submitResponse[0].valid == 1)
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
         var userData =[submitResponse[0].nombre,submitResponse[0].usuario];
@@ -63,6 +61,8 @@ $$('#my-login-screen .login-button').on('click', function () {
         // Close login screen
         app.loginScreen.close('#my-login-screen');
       }
+      else
+        $('.feedback_login').html("Usuario o Contraseña invalidos");
     })
     .fail( function(xhr, textStatus, errorThrown) {
     //error
