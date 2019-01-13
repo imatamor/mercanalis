@@ -210,16 +210,16 @@
 /	DIRECTORIO-PROFILE-ACTIVE
 /
 ---------------------------------------------*/
-.profile.active
+.profile.accordion-item
 {
 	background-color: #e0c300;
 	color: white;
 }
-.profile.active input[type="text"]
+.profile.accordion-item input[type="text"]
 {
 	color: white!important;
 }
-.profile.active .profile_arrow
+.profile.accordion-item .profile_arrow
 {
 	-webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
@@ -227,7 +227,7 @@
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
 }
-.profile.active .accordion-item-content
+.profile.accordion-item .accordion-item-content
 {
-	height: 28px;
+	background-color: grey;
 }
