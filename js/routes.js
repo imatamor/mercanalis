@@ -15,6 +15,10 @@ routes = [
     path: '/directorio/',
     url: './pages/directorio.html',
   },
+  {
+    path: '/noticias/',
+    url: './pages/noticias.html',
+  },
   // Page Loaders & Router
   {
     path: '/page-loader-template7/:user/:userId/:posts/:postId/',
