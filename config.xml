@@ -27,4 +27,13 @@
   <plugin name="cordova-plugin-file" spec="~4.3.1" />
   <plugin name="cordova-plugin-media" spec="~2.4.1" />
 
+  <plugin name="cordova-plugin-whitelist" spec="1" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+
 </widget>
