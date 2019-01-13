@@ -303,7 +303,7 @@ function getPhoto(source) {
   navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
     destinationType: Camera.DestinationType.FILE_URI,
     allowEdit: true,
-    sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
+    sourceType: source });
 }
 // Called if something bad happens.
 //
