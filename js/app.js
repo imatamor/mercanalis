@@ -56,11 +56,13 @@ $$('#my-login-screen .login-button').on('click', function () {
       if(submitResponse.length == 0)
         $('.feedback_login').html("Usuario o Contraseña invalidos");
       else
+      {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
-      var userData =[submitResponse[0].nombre,submitResponse[0].usuario];
-      localStorage.setItem('usuario', userData);
-      // Close login screen
-      app.loginScreen.close('#my-login-screen');
+        var userData =[submitResponse[0].nombre,submitResponse[0].usuario];
+        localStorage.setItem('usuario', userData);
+        // Close login screen
+        app.loginScreen.close('#my-login-screen');
+      }
     })
     .fail( function(xhr, textStatus, errorThrown) {
     //error
@@ -150,10 +152,10 @@ function setHomePage()
 function setFormPage()
 {
   //Camara
-  pictureSource   = navigator.camera.PictureSourceType;
+  /*pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
@@ -244,7 +246,7 @@ function removeRequire(element)
 / Description: Remueve el require al input dado
 /-----------------------------------------------------------------------------------------------------------------------*/
 function onPhotoFileSuccess(imageData) {
-  alert("onPhotoFileSuccess was called. imageData: "+imageData);
+  //alert("onPhotoFileSuccess was called. imageData: "+imageData);
   // Get image handle
   console.log(JSON.stringify(imageData));
 
@@ -268,7 +270,7 @@ function onPhotoFileSuccess(imageData) {
 // Called when a photo is successfully retrieved
 //
 function onPhotoURISuccess(imageURI) {
-  alert("onPhotoURISuccess was called. imageuri: "+imageURI);
+  //alert("onPhotoURISuccess was called. imageuri: "+imageURI);
   // Uncomment to view the image file URI
   // console.log(imageURI);
   // Get image handle
@@ -306,7 +308,7 @@ function capturePhotoWithFile() {
 // A button will call this function
 //
 function getPhoto(source) {
-  alert("getphoto was called. source= "+source);
+  //alert("getphoto was called. source= "+source);
   // Retrieve image file location from specified source
   navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
     destinationType: destinationType.FILE_URI,
@@ -321,5 +323,5 @@ function getPhoto(source) {
 // Called if something bad happens.
 //
 function onFail(message) {
-  alert('Failed because: ' + message);
+  //alert('Failed because: ' + message);
 }
