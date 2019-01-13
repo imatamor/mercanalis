@@ -1,6 +1,9 @@
 // Dom7
 var $$ = Dom7;
-
+//Global Variables
+var pictureSource;
+var destinationType;
+var uploadimgdata;
 // Framework7 App main instance
 var app  = new Framework7({
   root: '#app', // App root element
@@ -20,10 +23,7 @@ var app  = new Framework7({
     pageInit(page) {
       //console.log(page)
       if(page.name == "home")
-      {
         login();
-        console.log(localStorage.getItem('usuario'));
-      } 
       if(page.name == "form")
         setFormPage();
     }
@@ -61,15 +61,17 @@ $$('#my-login-screen .login-button').on('click', function () {
     $.post("services/login.php", data)
     .done(function(submitResponse) 
     {
-      //console.log(submitResponse);
-      if(submitResponse.length == 0)
-        $('.feedback_login').html("Usuario o Contraseña invalidos");
-      else
+      console.log(submitResponse);
+      if(submitResponse[0].valid == 1)
+      {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
-      var userData =[submitResponse[0].nombre,submitResponse[0].usuario];
-      localStorage.setItem('usuario', userData);
-      // Close login screen
-      app.loginScreen.close('#my-login-screen');
+        var userData =[submitResponse[0].nombre,submitResponse[0].usuario];
+        localStorage.setItem('usuario', userData);
+        // Close login screen
+        app.loginScreen.close('#my-login-screen');
+      }
+      else
+        $('.feedback_login').html("Usuario o Contraseña invalidos");
     })
     .fail( function(xhr, textStatus, errorThrown) {
     //error
@@ -196,6 +198,11 @@ function setHomePage()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function setFormPage()
 {
+  //Camara
+  /*pictureSource   = navigator.camera.PictureSourceType;
+  destinationType = navigator.camera.DestinationType;
+  $('#take_picture').click(capturePhotoWithFile);
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
@@ -279,4 +286,89 @@ function removeRequire(element)
   element.parents('.item-content.item-input').removeClass('item-input-with-error-message');
   element.parents('.item-content.item-input').removeClass('item-input-invalid');
   element.parent('.item-input-wrap').find('.item-input-error-message').remove();
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+function onPhotoFileSuccess(imageData) {
+  //alert("onPhotoFileSuccess was called. imageData: "+imageData);
+  // Get image handle
+  console.log(JSON.stringify(imageData));
+
+  // Get image handle
+  //
+  var largeImage = document.getElementById('largeImage');
+  // Unhide image elements
+  //
+  largeImage.style.display = 'block';
+  // Show the captured photo
+  // The inline CSS rules are used to resize the image
+  //
+  largeImage.src  = imageData;
+  uploadimgdata   = imageData;
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+// Called when a photo is successfully retrieved
+//
+function onPhotoURISuccess(imageURI) {
+  //alert("onPhotoURISuccess was called. imageuri: "+imageURI);
+  // Uncomment to view the image file URI
+  // console.log(imageURI);
+  // Get image handle
+  //
+  var largeImage = document.getElementById('largeImage');
+  // Unhide image elements
+  //
+  largeImage.style.display = 'block';
+  // Show the captured photo
+  // The inline CSS rules are used to resize the image
+  //
+
+//custom code to fix image uri
+  if (imageURI.substring(0,21)=="content://com.android") {
+    photo_split=imageURI.split("%3A");
+    imageURI="content://media/external/images/media/"+photo_split[1];
+  }
+
+  largeImage.src  = imageURI;
+  uploadimgdata   = imageURI;
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+function capturePhotoWithFile() {
+    navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+// A button will call this function
+//
+function getPhoto(source) {
+  //alert("getphoto was called. source= "+source);
+  // Retrieve image file location from specified source
+  navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+    destinationType: destinationType.FILE_URI,
+    allowEdit: true,
+    sourceType: source });
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+// Called if something bad happens.
+//
+function onFail(message) {
+  //alert('Failed because: ' + message);
 }

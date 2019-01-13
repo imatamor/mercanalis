@@ -4,8 +4,11 @@ include('db.php');
 
 $db 		= new db();
 $sql 		= "SELECT * FROM usuario where usuario = '".$_REQUEST['usuario']."' AND password = '".$_REQUEST['password']."' AND activo = '1';";
-$response = $db->Select($sql);
-
+$response 	= $db->Select($sql);
+if(!$response)
+	$response[0]['valid'] = 0;
+else
+	$response[0]['valid'] = 1;
 header("Content-Type: application/json",true);
 echo json_encode(utf8_converter($response));
 
