@@ -1,6 +1,8 @@
 // Dom7
 var $$ = Dom7;
-
+//Global Variables
+var pictureSource;
+var destinationType;
 // Framework7 App main instance
 var app  = new Framework7({
   root: '#app', // App root element
@@ -147,8 +149,8 @@ function setHomePage()
 function setFormPage()
 {
   //Camara
-  var pictureSource = navigator.camera.PictureSourceType;
-  var destinationType = navigator.camera.DestinationType;
+  pictureSource   = navigator.camera.PictureSourceType;
+  destinationType = navigator.camera.DestinationType;
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
@@ -301,7 +303,7 @@ function getPhoto(source) {
   alert("getphoto was called. source= "+source);
   // Retrieve image file location from specified source
   navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-    destinationType: Camera.DestinationType.FILE_URI,
+    destinationType: destinationType.FILE_URI,
     allowEdit: true,
     sourceType: source });
 }
