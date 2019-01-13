@@ -298,7 +298,6 @@ function onPhotoFileSuccess(imageData) {
   //alert("onPhotoFileSuccess was called. imageData: "+imageData);
   // Get image handle
   console.log(JSON.stringify(imageData));
-
   // Get image handle
   //
   var largeImage = document.getElementById('largeImage');
