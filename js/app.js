@@ -6,22 +6,18 @@ var destinationType;
 var uploadimgdata;
 // Framework7 App main instance
 var app  = new Framework7({
-  root: '#app', // App root element
-  id: 'io.framework7.testapp', // App bundle ID
-  name: 'Framework7', // App name
-  theme: 'auto', // Automatic theme detection
+  root: '#app', 
+  id: 'io.framework7.testapp',
+  name: 'Framework7', 
+  theme: 'auto', 
   precompileTemplates: false,
   template7Pages: true,
-  // Specify Template7 data for pages
   template7Data: {
-    // Another plain data object, used in "about" link in data-contextName object 
     directorio: JSON.parse(localStorage.getItem('directorio') )
   },
-  // App routes
   routes: routes,
   on: {
     pageInit(page) {
-      //console.log(page)
       if(page.name == "home")
         login();
       if(page.name == "form")
@@ -42,9 +38,6 @@ $$('#my-login-screen .login-button').on('click', function () {
   var usuario = $$('#my-login-screen [name="username"]').val();
   var password = $$('#my-login-screen [name="password"]').val();
   var valid = true;
-
-  /*if($$('input').hasClass("input-invalid"))
-    alert($$('input:empty').length);*/
 
   if(!usuario)
     valid = false;
@@ -84,36 +77,31 @@ $$('#my-login-screen .login-button').on('click', function () {
   }
 });
 /**
+ * ----------------------------------------
  * LOGIN OPEN LOGIN SCREEN
  */
 function login(){
   if(!localStorage.getItem('usuario'))
     app.loginScreen.open('#my-login-screen', true);
-  
 }
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   var virtualList = app.virtualList.create({
-    // List Element
     el: '.virtual-list',
-    // Pass array with items
-    // items: items,
     items: app.params.template7Data['directorio'],
-    // Custom search function for searchbar
     searchAll: function (query, items) {
-      var found = [];
-      for (var i = 0; i < items.length; i++) {
-        if (items[i].nombre.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
-      }
-      return found; //return array with mathced indexes
+        var found = [];
+      	for (var i = 0; i < items.length; i++) {
+        	if (items[i].nombre.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+      	}
+     	return found; //return array with mathced indexes
     },
     // List item Template7 template
     itemTemplate:
     '<li class="profile accordion-item">'+
       '<a href="" class="item-link item-content">'+
         '<div class="item-inner">'+
-          //'<img src="images/elector/elector_profile.png" class="profile_image" width="25px">'+
-          '<i class="f7-icons">person</i>'+
+          '<img src="images/elector/elector_profile.png" class="profile_image" width="25px">'+          
           '<div class="item-title profile_name">{{nombre}}  {{apellido}}</div>'+
         '</div>'+
       '</a>'+
@@ -123,7 +111,6 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
       '<div class="profile_option profile_hijos"><span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="2" readonly></div>'+
       '</div>'+
     '</li>',
-    // Item height
     height: app.theme === 'ios' ? 63 : 73,
   });
 })
