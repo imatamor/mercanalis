@@ -227,12 +227,18 @@ function saveElector()
 / Description: Inicializa todos los inputs del form que lo requieran.
 /-----------------------------------------------------------------------------------------------------------------------*/
 function getBase64Image(img) {
+  console.log(1);
   var canvas = document.createElement("canvas");
+  console.log(2);
   canvas.width = img.width;
   canvas.height = img.height;
+  console.log(3);
   var ctx = canvas.getContext("2d");
+  console.log(4);
   ctx.drawImage(img, 0, 0);
+  console.log(5);
   var dataURL = canvas.toDataURL("image/png");
+  console.log(6);
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 /*----------------------------------------------------------------------------------------------------------------------
