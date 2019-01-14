@@ -4,6 +4,7 @@ var $$ = Dom7;
 var pictureSource;
 var destinationType;
 var uploadimgdata;
+var image;
 // Framework7 App main instance
 var app  = new Framework7({
   root: '#app', 
@@ -207,7 +208,6 @@ function saveElector()
   var credito_agricola        = $$('input[type=checkbox][name=credito_agricola]').val();
   var otros                   = $$('textarea[name=otro]').val();
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
-  var image;
   toDataUrl(uploadimgdata, function(myBase64) {
       //console.log(myBase64); // myBase64 is the base64 string
       image               = myBase64;
