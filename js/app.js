@@ -236,10 +236,10 @@ function setHomePage()
 function setFormPage()
 {
   //Camara
-  /*pictureSource   = navigator.camera.PictureSourceType;
+  pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
@@ -353,7 +353,7 @@ function onPhotoFileSuccess(imageData) {
 // Called when a photo is successfully retrieved
 //
 function onPhotoURISuccess(imageURI) {
-  //alert("onPhotoURISuccess was called. imageuri: "+imageURI);
+  alert("onPhotoURISuccess was called. imageuri: "+imageURI);
   // Uncomment to view the image file URI
   // console.log(imageURI);
   // Get image handle
