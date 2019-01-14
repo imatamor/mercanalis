@@ -16,7 +16,7 @@ var app  = new Framework7({
   routes: routes,
   on: {
     pageInit(page) {
-      console.log(app.params.template7Data);
+      //console.log(app.params.template7Data);
       if(page.name == "home"){
         login();
         if(localStorage.getItem('usuario'))
@@ -65,7 +65,7 @@ $$('#my-login-screen .login-button').on('click', function () {
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
         localStorage.setItem('usuario', JSON.stringify(submitResponse[0]));
-        console.log(localStorage.getItem('usuario'));
+        //console.log(localStorage.getItem('usuario'));
         // Close login screen
         app.loginScreen.close('#my-login-screen');
         loadDirectorio();
@@ -207,7 +207,7 @@ function saveElector()
   var credito_agricola        = $$('input[type=checkbox][name=credito_agricola]').val();
   var otros                   = $$('textarea[name=otro]').val();
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
-  var image                   = $$('input[type=text][name=nombres]').val();
+  var image                   = '';//getBase64Image(uploadimgdata);
   
   var elector                 = [encuestador,nombre,apellido,cedula,fecha_nacimiento,nombre_carnet,nombre_familia,ciudad,canton,parroquia,barrio,sector,direccion,estado_civil,numero_hijos,tiene_discapacidad,discapacidad,ocupacion,profesion,nivel_escolaridad,capacitacion_deseada,tiene_bono_gobierno,tiene_bono_municipio,telefono_convencional,telefono_celular,telefono_compania,tiene_whatsapp,whatsapp,tiene_facebook,facebook,tiene_instagram,instagram,tiene_twitter,twitter,correo_electronico,tiene_casa_propia,tiene_vehiculo,placa,seguro_medico,credito_agricola,otros,numero_contrato,image];
   console.log(elector);
@@ -217,6 +217,20 @@ function saveElector()
     directorioTmp.push(elector);
     updateStorage();
   }
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
+function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
@@ -331,7 +345,7 @@ function removeRequire(element)
 function onPhotoFileSuccess(imageData) {
   //alert("onPhotoFileSuccess was called. imageData: "+imageData);
   // Get image handle
-  console.log(JSON.stringify(imageData));
+  //console.log(JSON.stringify(imageData));
   // Get image handle
   //
   var largeImage = document.getElementById('largeImage');
