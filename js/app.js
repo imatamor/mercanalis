@@ -217,7 +217,6 @@ function saveElector()
     var directorioTmp = app.params.template7Data['directorio'];
     directorioTmp.push(elector);
     app.params.template7Data['directorio'] = directorioTmp;
-
     updateStorage();
   }
 }
