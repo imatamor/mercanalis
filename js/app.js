@@ -58,8 +58,7 @@ $$('#my-login-screen .login-button').on('click', function () {
       if(submitResponse[0].valid == 1)
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
-        var userData =[submitResponse[0].nombre,submitResponse[0].usuario];
-        localStorage.setItem('usuario', userData);
+        localStorage.setItem('usuario', JSON.stringify(submitResponse[0]));
         // Close login screen
         app.loginScreen.close('#my-login-screen');
       }
@@ -142,7 +141,7 @@ function validateForm()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function saveElector()
 {
-
+  var encuestador             = JSON.parse(localStorage.getItem('usuario')).usuario;
   var nombre                  = $$('input[type=text][name=nombres]').val();
   var apellido                = $$('input[type=text][name=apellidos]').val();
   var cedula                  = $$('input[type=text][name=cedula]').val();
@@ -154,7 +153,7 @@ function saveElector()
   var parroquia               = $$('input[type=text][name=parroquia]').val();
   var barrio                  = $$('input[type=text][name=barrio]').val();
   var sector                  = $$('input[type=text][name=sector]').val();
-  var direccion               = $$('textarea[name=nombres]').val();
+  var direccion               = $$('textarea[name=direccion]').val();
   var estado_civil            = $$('input[type=radio][name=estado_civil]:checked').val();
   var numero_hijos            = $$('input[type=text][name=numero_hijos]').val();
   var tiene_discapacidad      = $$('input[type=radio][name=discapacidad]:checked').val();
@@ -176,7 +175,7 @@ function saveElector()
   var instagram               = $$('input[type=text][name=user_instagram]').val();
   var tiene_twitter           = $$('input[type=radio][name=tiene_twitter]:checked').val();
   var twitter                 = $$('input[type=text][name=user_twitter]').val();
-  var correo_electronico      = $$('input[type=text][name=email]').val();
+  var correo_electronico      = $$('input[type=email][name=email]').val();
   var tiene_casa_propia       = $$('input[type=radio][name=tiene_casa_propia]:checked').val();
   var tiene_vehiculo          = $$('input[type=radio][name=tiene_vehiculo]:checked').val();
   var placa                   = $$('input[type=text][name=placa]').val();
@@ -186,7 +185,7 @@ function saveElector()
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
   var image                   = $$('input[type=text][name=nombres]').val();
   
-  var elector                 = [nombre,apellido,cedula,fecha_nacimiento,nombre_carnet,nombre_familia,ciudad,canton,parroquia,barrio,sector,direccion,estado_civil,numero_hijos,tiene_discapacidad,discapacidad,ocupacion,profesion,nivel_escolaridad,capacitacion_deseada,tiene_bono_gobierno,tiene_bono_municipio,telefono_convencional,telefono_celular,telefono_compania,tiene_whatsapp,whatsapp,tiene_facebook,facebook,tiene_instagram,instagram,tiene_twitter,twitter,correo_electronico,tiene_casa_propia,tiene_vehiculo,placa,seguro_medico,credito_agricola,otros,numero_contrato,image];
+  var elector                 = [encuestador,nombre,apellido,cedula,fecha_nacimiento,nombre_carnet,nombre_familia,ciudad,canton,parroquia,barrio,sector,direccion,estado_civil,numero_hijos,tiene_discapacidad,discapacidad,ocupacion,profesion,nivel_escolaridad,capacitacion_deseada,tiene_bono_gobierno,tiene_bono_municipio,telefono_convencional,telefono_celular,telefono_compania,tiene_whatsapp,whatsapp,tiene_facebook,facebook,tiene_instagram,instagram,tiene_twitter,twitter,correo_electronico,tiene_casa_propia,tiene_vehiculo,placa,seguro_medico,credito_agricola,otros,numero_contrato,image];
   console.log(elector);
   if(validateForm())
   {
@@ -212,10 +211,10 @@ function setHomePage()
 function setFormPage()
 {
   //Camara
-  pictureSource   = navigator.camera.PictureSourceType;
+  /*pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
