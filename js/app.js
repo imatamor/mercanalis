@@ -22,10 +22,10 @@ var app  = new Framework7({
         login();
         if(localStorage.getItem('usuario'))
         {
-          if(localStorage.getItem('directorio')){
+          if(app.params.template7Data['directorio']){
             console.log('Ya existe directorio');
             app.params.template7Data['directorio'] = localStorage.getItem('directorio');
-            console.log(app.params.template7Data['directorio']);
+            //console.log(app.params.template7Data['directorio']);
           }else{
             console.log('No existe directorio');
             loadDirectorio();
@@ -119,7 +119,7 @@ function updateStorage()
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   console.log('Dentro del directorio');
-  console.log(app.params.template7Data['directorio']);
+  //console.log(app.params.template7Data['directorio']);
   var virtualList = app.virtualList.create({
     el: '.virtual-list',
     items: app.params.template7Data['directorio'],
@@ -243,13 +243,13 @@ function saveElector()
       image               = myBase64;
       var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image};
       console.log(elector);
-      if(validateForm() && image)
+      if(validateForm() /*&& image*/)
       {
         var directorioTmp = app.params.template7Data['directorio'];
         directorioTmp.push(elector);
         app.params.template7Data['directorio'] = directorioTmp;
         updateStorage();
-        app.router.back('/', {force: true, ignoreCache: false, reload: false})
+        app.router.back('/', {force: true, ignoreCache: true, reload: true})
       }
   });
 }
@@ -288,10 +288,10 @@ function setHomePage()
 function setFormPage()
 {
   //Camara
-  pictureSource   = navigator.camera.PictureSourceType;
+  /*pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad

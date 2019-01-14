@@ -98,6 +98,36 @@
 /	FORM
 /
 ---------------------------------------------*/
+#take_picture .row,#select_gallery .row
+{
+	justify-content: center;
+}
+#take_picture .button
+{
+	display: flex;
+	flex-direction: column;
+	height: 120px;
+	width: 120px;
+	justify-content: center;
+	margin-top: 20px;
+	text-align: center;
+	background-color: #535087;
+}
+#take_picture .icon
+{
+	font-size: 4em;
+}
+#take_picture .text
+{
+	font-size: 1.2em;
+}
+#select_gallery .button
+{
+	width: 120px;
+	background-color: #535087;
+	height: 40px;
+	line-height: 20px;
+}
 #largeImage
 {
 	display:none; 
