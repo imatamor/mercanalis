@@ -10,16 +10,22 @@ var app  = new Framework7({
   id: 'io.framework7.testapp',
   name: 'Framework7', 
   theme: 'auto', 
-  precompileTemplates: false,
+  precompileTemplates: true,
   template7Pages: true,
-  template7Data: {
-    directorio: JSON.parse(localStorage.getItem('directorio') )
-  },
+  template7Data: {},
   routes: routes,
   on: {
     pageInit(page) {
-      if(page.name == "home")
+      console.log(app.params.template7Data);
+      if(page.name == "home"){
         login();
+        if(localStorage.getItem('usuario'))
+          if(app.params.template7Data['directorio']){
+            app.params.template7Data['directorio'] = localStorage.getItem('directorio');
+          }else{
+            loadDirectorio();
+          }
+      }
       if(page.name == "form")
         setFormPage();
     }
@@ -59,8 +65,10 @@ $$('#my-login-screen .login-button').on('click', function () {
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
         localStorage.setItem('usuario', JSON.stringify(submitResponse[0]));
+        console.log(localStorage.getItem('usuario'));
         // Close login screen
         app.loginScreen.close('#my-login-screen');
+        loadDirectorio();
       }
       else
         $('.feedback_login').html("Usuario o Contraseña invalidos");
@@ -77,16 +85,32 @@ $$('#my-login-screen .login-button').on('click', function () {
 });
 /**
  * ----------------------------------------
- * LOGIN OPEN LOGIN SCREEN
+ * LOGIN OPEN
  */
 function login(){
   if(!localStorage.getItem('usuario'))
     app.loginScreen.open('#my-login-screen', true);
 }
+/**
+ * ----------------------------------------
+ * LOAD DIRECTORIO
+ */
+function loadDirectorio(){
+	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
+   localStorage.setItem('directorio', data);
+   var stDirectorio = localStorage.getItem('directorio');
+   app.params.template7Data['directorio'] = JSON.parse(stDirectorio);
+	});
+}
+/**
+ * ----------------------------------------
+ * UPDATE SCREEN
+*/
 function updateStorage()
 {
   localStorage.setItem('directorio',app.params.template7Data['directorio']);
-}
+} 
+
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   var virtualList = app.virtualList.create({
     el: '.virtual-list',

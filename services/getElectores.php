@@ -3,7 +3,7 @@
 //header("Content-Type: text/html;charset=utf-8");
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
-
+header("Content-type:application/json");
 include('db.php');
 
 extract($_REQUEST);
