@@ -257,10 +257,10 @@ function setHomePage()
 function setFormPage()
 {
   //Camara
-  pictureSource   = navigator.camera.PictureSourceType;
+  /*pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
