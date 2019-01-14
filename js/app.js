@@ -219,6 +219,7 @@ function saveElector()
         directorioTmp.push(elector);
         app.params.template7Data['directorio'] = directorioTmp;
         updateStorage();
+        app.router.navigate('/', {reloadCurrent: true});
       }
   });
 }
