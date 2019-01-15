@@ -17,17 +17,14 @@ var app  = new Framework7({
   on: {
     pageInit(page) {
       //console.log(app.params.template7Data);
-      console.log(page.name);
+      //console.log(page.name);
       if(page.name == "home"){
         login();
         if(localStorage.getItem('usuario'))
         {
-          if(app.params.template7Data['directorio']){
-            console.log('Ya existe directorio');
-            app.params.template7Data['directorio'] = localStorage.getItem('directorio');
-            //console.log(app.params.template7Data['directorio']);
+          if(localStorage.getItem('directorio')){
+            app.params.template7Data['directorio'] = JSON.parse(localStorage.getItem('directorio'));
           }else{
-            console.log('No existe directorio');
             loadDirectorio();
           }
         }
@@ -118,15 +115,14 @@ function updateStorage()
 } 
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
-  console.log('Dentro del directorio');
-  //console.log(app.params.template7Data['directorio']);
   var virtualList = app.virtualList.create({
     el: '.virtual-list',
     items: app.params.template7Data['directorio'],
     searchAll: function (query, items) {
         var found = [];
       	for (var i = 0; i < items.length; i++) {
-        	if (items[i].nombre.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+          var nombre_completo = items[i].nombre + " " + items[i].apellido;
+        	if (nombre_completo.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
       	}
      	return found; //return array with mathced indexes
     },
@@ -242,7 +238,7 @@ function saveElector()
       //console.log(myBase64); // myBase64 is the base64 string
       image               = myBase64;
       var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image};
-      console.log(elector);
+      //console.log(elector);
       if(validateForm() /*&& image*/)
       {
         var directorioTmp = app.params.template7Data['directorio'];
@@ -250,6 +246,11 @@ function saveElector()
         app.params.template7Data['directorio'] = directorioTmp;
         updateStorage();
         app.router.back('/', {force: true, ignoreCache: true, reload: true})
+      }
+      else
+      {
+        console.log('no valido');
+        markEmpty();
       }
   });
 }
@@ -375,6 +376,26 @@ function removeRequire(element)
   element.parents('.item-content.item-input').removeClass('item-input-with-error-message');
   element.parents('.item-content.item-input').removeClass('item-input-invalid');
   element.parent('.item-input-wrap').find('.item-input-error-message').remove();
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+function markEmpty()
+{
+  $('.form_content').find(':input[required]:visible').each(function() {
+    if (!this.value.trim()) {
+      console.log(this);
+      this.setCustomValidity('');
+    }
+  });
+  /*element.removeAttr('required');
+  element.removeAttr('validate');
+  element.removeClass('input-invalid');
+  element.parents('.item-content.item-input').removeClass('item-input-with-error-message');
+  element.parents('.item-content.item-input').removeClass('item-input-invalid');
+  element.parent('.item-input-wrap').find('.item-input-error-message').remove();*/
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire

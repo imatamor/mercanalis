@@ -119,14 +119,15 @@
 }
 #take_picture .text
 {
-	font-size: 1.2em;
+	font-size: 1.1em;
+	margin: 0;
 }
 #select_gallery .button
 {
 	width: 120px;
 	background-color: #535087;
-	height: 40px;
-	line-height: 20px;
+	/*height: 40px;
+	line-height: 20px;*/
 }
 #largeImage
 {
