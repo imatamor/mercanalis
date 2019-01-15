@@ -107,7 +107,7 @@ function updateStorage()
 
 $$(document).on('page:afterin', '.page[data-name="form"]', function (e) {
   var template = $$('#formulario').html();
- 
+
   // compile it with Template7
   var compiledTemplate = Template7.compile(template);
   console.log(compiledTemplate);
@@ -282,7 +282,7 @@ function saveElector()
   toDataUrl(uploadimgdata, function(myBase64) {
       //console.log(myBase64); // myBase64 is the base64 string
       image               = myBase64;
-      var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image};
+      var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0};
       //console.log(elector);
       if(validateForm() /*&& image*/)
       {
@@ -556,27 +556,39 @@ function onFail(message) {
 /-----------------------------------------------------------------------------------------------------------------------*/
 function uploadDirectorio()
 {
-  /*app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
-   localStorage.setItem('directorio', data);
-   var stDirectorio = localStorage.getItem('directorio');
-   app.params.template7Data['directorio'] = JSON.parse(stDirectorio);
-  });*/
-
+  $('#home_footer_text').html('Subiendo, Este proceso podría tomar varios minutos...');
   var directorioTmp = app.params.template7Data['directorio'];
-  for (var i = 0; i < directorioTmp.length; i++) {
-    console.log(directorioTmp[i].nombre);
+  uploadElector(0,directorioTmp);
+  loadDirectorio();
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+function uploadElector(index,directorio)
+{
+  if(index >= directorio.length)
+  {
+    $('#home_footer_text').html('Transferencia completada.');
+    return;
   }
-
-
-
-  /*app.request.post('http://138.197.154.196/mercanalis/saveElector.php',
-    data,
-    function(response)
-    {
-      console.log(response);
-    },
-    function(error)
-    {
-      console.log(error);
-    });*/
+  var currentIndex = index;
+  while(directorio[currentIndex].uploaded != 0)
+  {
+    currentIndex++;
+  }
+  var elector = directorio[currentIndex];
+  app.request.post('http://138.197.154.196/mercanalis/saveElector.php',
+  elector,
+  function(response)
+  {
+    //console.log(response);
+    var nextIndex = currentIndex + 1;
+    uploadElector(nextIndex,directorio);
+  },
+  function(error)
+  {
+    console.log(error);
+  });
 }
