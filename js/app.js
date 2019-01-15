@@ -387,15 +387,18 @@ function markEmpty()
   $('.form_content').find(':input[required]:visible').each(function() {
     if (!this.value.trim()) {
       console.log(this);
-      this.setCustomValidity('');
+      app.input.validate(this);
     }
   });
-  /*element.removeAttr('required');
-  element.removeAttr('validate');
-  element.removeClass('input-invalid');
-  element.parents('.item-content.item-input').removeClass('item-input-with-error-message');
-  element.parents('.item-content.item-input').removeClass('item-input-invalid');
-  element.parent('.item-input-wrap').find('.item-input-error-message').remove();*/
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+function markReadOnly()
+{
+  
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
