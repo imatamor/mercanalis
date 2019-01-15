@@ -114,7 +114,17 @@ function updateStorage()
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
 } 
 
+$$(document).on('page:afterin', '.page[data-name="form"]', function (e) {
+  var template = $$('#formulario').html();
+ 
+  // compile it with Template7
+  var compiledTemplate = Template7.compile(template);
+  console.log(compiledTemplate);
+  alert(1);
+});
+
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
+  
   var virtualList = app.virtualList.create({
     el: '.virtual-list',
     items: app.params.template7Data['directorio'],
@@ -127,8 +137,50 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
      	return found; //return array with mathced indexes
     },
     // List item Template7 template
-    itemTemplate:
-    '<li class="profile accordion-item">'+
+    //itemTemplate: // reemplace esto por renderItem
+    renderItem:function(item){
+      var obj=app.utils.extend(item,{index:this.items.indexOf(item)});
+      var tmpl='<li class="profile accordion-item">\
+                <div class="item-content item-input">\
+                  <div class="item-inner">\
+                    <a href="" class="item-link item-content">\
+                      <div class="row flex">\
+                        <div class="col-100 tablet-30 profile_image">\
+                          <img src="images/elector/elector_profile.png">\
+                        </div>\
+                        <div class="col-100 tablet-70 profile_info">\
+                          <div class="profile_info_left col-80">\
+                            <div class="profile_name">\
+                              <span class="text">{{nombre}} {{apellido}}</span>\
+                            </div>\
+                            <div class="profile_option profile_estado">\
+                              <span class="text">Estado Civil</span><input type="text" name="profile_estado" value="{{estado_civil}}" readonly>\
+                            </div>\
+                            <div class="profile_option profile_hijos">\
+                              <span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="{{numero_hijos}}" readonly>\
+                            </div>\
+                          </div>\
+                          <div class="profile_info_right col-20">\
+                            <div class="profile_arrow">\
+                              <span class="icono icon-home_flecha"></span>\
+                            </div>\
+                          </div>\
+                        </div>\
+                      </div>\
+                    </a>\
+                    <div class="accordion-item-content">\
+                      <div class="profile_buttons">\
+                        <a href="/form/{{index}}" class="col button button-small button-fill">Ver</a>\
+                        <button class="col button button-small button-fill">Editar</button>\
+                        <button class="col button button-small button-fill">Eliminar</button>\
+                      </div>\
+                    </div>\
+                  </div>\
+                </div>\
+              </li>';
+      return Template7.compile(tmpl)(obj);
+    },
+    /*'<li class="profile accordion-item">'+
       '<div class="item-content item-input">'+
         '<div class="item-inner">'+
           '<a href="" class="item-link item-content">'+
@@ -158,17 +210,19 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
           '</a>'+
           '<div class="accordion-item-content">'+
             '<div class="profile_buttons">'+
-              '<button class="col button button-small button-fill">Ver</button>'+
+              '<a href="/form/{{@item}}" class="col button button-small button-fill">Ver</a>'+
               '<button class="col button button-small button-fill">Editar</button>'+
               '<button class="col button button-small button-fill">Eliminar</button>'+
             '</div>'+
           '</div>'+
         '</div>'+
       '</div>'+
-    '</li>'
+    '</li>'*/
     //height: app.theme === 'ios' ? 63 : 73,
   });
+
 })
+
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
 / Use: setFormPage();

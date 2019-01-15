@@ -1,4 +1,4 @@
-<div class="page" data-name="form">
+<div id="formulario" class="page" data-name="form">
   <div class="navbar">
     <div class="navbar-inner sliding">
       <div class="left">
@@ -36,7 +36,7 @@
           <div class="item-content item-input">
             <div class="item-inner">
               <div class="item-input-wrap">
-                <input type="text" name="nombres" placeholder="Nombres" required validate/>
+                <input type="text" name="nombres" placeholder="Nombres" required validate value="{{this.app.user.nombre}}"/>
               </div>
             </div>
           </div>

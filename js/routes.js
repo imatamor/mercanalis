@@ -12,6 +12,29 @@ routes = [
     url: './pages/form.html',
   },
   {
+    path: '/form/:id',
+    async: function (routeTo, routeFrom, resolve, reject) {
+      var router = this;
+      var app = router.app;
+      var us =  app.params.template7Data['directorio'][routeTo.params.id];
+      app.preloader.show();
+      //var user = app.params.template7Data['directorio'][routeTo.params.id];
+      setTimeout(function () {
+      resolve(
+        {
+          url: './pages/form.html',
+        },
+        {
+          context: {
+            user: us
+          }
+        },
+      );
+     }, 100);
+     app.preloader.hide();
+    }
+  },
+  {
     path: '/directorio/',
     url: './pages/directorio.html',
   },
