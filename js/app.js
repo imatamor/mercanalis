@@ -17,7 +17,7 @@ var app  = new Framework7({
   on: {
     pageInit(page) {
       //console.log(app.params.template7Data);
-      //console.log(page.name);
+      console.log(page.name);
       if(page.name == "home")
         setHomePage();
       if(page.name == "form")
@@ -105,15 +105,6 @@ function updateStorage()
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
 } 
 
-$$(document).on('page:afterin', '.page[data-name="form"]', function (e) {
-  var template = $$('#formulario').html();
-
-  // compile it with Template7
-  var compiledTemplate = Template7.compile(template);
-  console.log(compiledTemplate);
-  alert(1);
-});
-
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   
   var virtualList = app.virtualList.create({
@@ -161,7 +152,7 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
                     </a>\
                     <div class="accordion-item-content">\
                       <div class="profile_buttons">\
-                        <a href="/form/{{index}}" class="col button button-small button-fill">Ver</a>\
+                        <a href="/elector/{{index}}/" class="col button button-small button-fill">Ver</a>\
                         <button class="col button button-small button-fill">Editar</button>\
                         <button class="col button button-small button-fill">Eliminar</button>\
                       </div>\

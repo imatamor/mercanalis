@@ -11,28 +11,68 @@ routes = [
     path: '/form/',
     url: './pages/form.html',
   },
-  {
-    path: '/form/:id',
+  /*{
+    path: '/elector/:id/',
     async: function (routeTo, routeFrom, resolve, reject) {
+      console.log('Entro al router path');
       var router = this;
       var app = router.app;
-      var us =  app.params.template7Data['directorio'][routeTo.params.id];
+      console.log(routeTo.params.id);
       app.preloader.show();
+      //var us =  app.params.template7Data['directorio'][routeTo.params.id];
+
+      console.log(us);
       //var user = app.params.template7Data['directorio'][routeTo.params.id];
       setTimeout(function () {
       resolve(
         {
-          url: './pages/form.html',
+          url: './pages/elector.html',
         },
         {
           context: {
-            user: us
+            user: us,
           }
         },
       );
-     }, 100);
+     }, 1000);
      app.preloader.hide();
     }
+  },*/
+  {
+    path: '/elector/:id/',
+    async: function (routeTo, routeFrom, resolve, reject) {
+      // Router instance
+      var router = this;
+
+      // App instance
+      var app = router.app;
+
+      // Show Preloader
+      app.preloader.show();
+
+      // User ID from request
+      var userId = routeTo.params.userId;
+
+      // Simulate Ajax Request
+      setTimeout(function () {
+        // We got user data from request
+        var user = app.params.template7Data['directorio'][routeTo.params.id];
+        // Hide Preloader
+        app.preloader.hide();
+
+        // Resolve route to load page
+        resolve(
+          {
+            componentUrl: './pages/elector.html',
+          },
+          {
+            context: {
+              user: user,
+            }
+          }
+        );
+      }, 1000);
+    },
   },
   {
     path: '/directorio/',
