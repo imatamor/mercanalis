@@ -18,17 +18,8 @@ var app  = new Framework7({
     pageInit(page) {
       //console.log(app.params.template7Data);
       //console.log(page.name);
-      if(page.name == "home"){
-        login();
-        if(localStorage.getItem('usuario'))
-        {
-          if(localStorage.getItem('directorio')){
-            app.params.template7Data['directorio'] = JSON.parse(localStorage.getItem('directorio'));
-          }else{
-            loadDirectorio();
-          }
-        }
-      }
+      if(page.name == "home")
+        setHomePage();
       if(page.name == "form")
         setFormPage();
     }
@@ -278,7 +269,16 @@ function toDataUrl(url, callback) {
 /-----------------------------------------------------------------------------------------------------------------------*/
 function setHomePage()
 {
-  $('.feedback_section_login').hide();
+  login();
+  if(localStorage.getItem('usuario'))
+  {
+    if(localStorage.getItem('directorio')){
+      app.params.template7Data['directorio'] = JSON.parse(localStorage.getItem('directorio'));
+    }else{
+      loadDirectorio();
+    }
+  }
+  $$('#upload_directory').on('click', uploadDirectorio);
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
@@ -494,4 +494,35 @@ function getPhoto(source) {
 //
 function onFail(message) {
   //alert('Failed because: ' + message);
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+function uploadDirectorio()
+{
+  /*app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
+   localStorage.setItem('directorio', data);
+   var stDirectorio = localStorage.getItem('directorio');
+   app.params.template7Data['directorio'] = JSON.parse(stDirectorio);
+  });*/
+
+  var directorioTmp = app.params.template7Data['directorio'];
+  for (var i = 0; i < directorioTmp.length; i++) {
+    console.log(directorioTmp[i].nombre);
+  }
+
+
+
+  /*app.request.post('http://138.197.154.196/mercanalis/saveElector.php',
+    data,
+    function(response)
+    {
+      console.log(response);
+    },
+    function(error)
+    {
+      console.log(error);
+    });*/
 }
