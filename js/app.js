@@ -133,11 +133,11 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
       '</a>'+
       '<div class="accordion-item-content">'+
       	'<div class="profile_option profile_edad"><span class="text">Edad</span><input type="text" name="profile_edad" value="31" readonly></div>'+
-      	'<div class="profile_option profile_estado"><span class="text">Estado Civil</span><input type="text" name="profile_estado" value="Soltero" readonly></div>'+
-      	'<div class="profile_option profile_hijos"><span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="2" readonly></div>'+
+      	'<div class="profile_option profile_estado"><span class="text">Estado Civil</span><input type="text" name="profile_estado" value="{{estado_civil}}" readonly></div>'+
+      	'<div class="profile_option profile_hijos"><span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="{{numero_hijos}}" readonly></div>'+
       '</div>'+
-    '</li>',
-    height: app.theme === 'ios' ? 63 : 73,
+    '</li>'
+    //height: app.theme === 'ios' ? 63 : 73,
   });
 })
 
