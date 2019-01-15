@@ -12,11 +12,22 @@
   </div>
   <div class="page-content">
     <div>
-          <a href="#" class="button button-fill" id="take_picture">Tomar foto</a> <br>
-          <a href="#" class="button button-fill" id="select_gallery">Seleccionar de Galería</a><br>
-          <div id="uplimgcontainer">
-            <img id="largeImage" src="" />
+      <a href="#" id="take_picture">
+        <div class="row">
+          <div class="button button-fill">
+            <span class="icon icon-elector_upload_file"></span>
+            <span class="text">Tomar foto</span>
           </div>
+        </div>
+      </a> <br>
+      <a href="#" id="select_gallery">
+        <div class="row">
+          <div class="button button-fill">Galería</div>
+        </div>
+      </a><br>
+      <div id="uplimgcontainer">
+        <img id="largeImage" src="" />
+      </div>
     </div>
     <div class="block-title">Ingresa la información completa</div>
     <div class="list no-hairlines-md form_content">
@@ -138,14 +149,14 @@
                   <div class="item-inner">
                     <div class="item-title item-label">Soltero</div>
                   </div>
-                  <input type="radio" name="estado_civil" value="Soltero" checked="checked"/>
+                  <input type="radio" name="estado_civil" value="Soltero" checked="checked" readonly="readonly" />
                   <i class="icon icon-radio"></i>
                 </label>
                 <label class="item-radio item-content tablet-50 col-100">
                   <div class="item-inner">
                     <div class="item-title item-label">Casado</div>
                   </div>
-                  <input type="radio" name="estado_civil" value="Casado"/>
+                  <input type="radio" name="estado_civil" value="Casado" readonly="readonly"/>
                   <i class="icon icon-radio"></i>
                 </label>
               </div>
@@ -221,7 +232,7 @@
                   <option value="secundaria-incompleta">Secundaria incompleta</option>
                   <option value="bachiller">Bachiller</option>
                   <option value="universidad-incompleta">Universidad incompleta</option>
-                  <option value="bachiluniversidad-completaler">Universidad completa</option>
+                  <option value="universidad-completa">Universidad completa</option>
                 </select> 
               </div>
             </div>

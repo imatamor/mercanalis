@@ -16,15 +16,18 @@ var app  = new Framework7({
   routes: routes,
   on: {
     pageInit(page) {
-      console.log(app.params.template7Data);
+      //console.log(app.params.template7Data);
+      //console.log(page.name);
       if(page.name == "home"){
         login();
         if(localStorage.getItem('usuario'))
-          if(app.params.template7Data['directorio']){
-            app.params.template7Data['directorio'] = localStorage.getItem('directorio');
+        {
+          if(localStorage.getItem('directorio')){
+            app.params.template7Data['directorio'] = JSON.parse(localStorage.getItem('directorio'));
           }else{
             loadDirectorio();
           }
+        }
       }
       if(page.name == "form")
         setFormPage();
@@ -65,7 +68,7 @@ $$('#my-login-screen .login-button').on('click', function () {
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
         localStorage.setItem('usuario', JSON.stringify(submitResponse[0]));
-        console.log(localStorage.getItem('usuario'));
+        //console.log(localStorage.getItem('usuario'));
         // Close login screen
         app.loginScreen.close('#my-login-screen');
         loadDirectorio();
@@ -118,31 +121,54 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
     searchAll: function (query, items) {
         var found = [];
       	for (var i = 0; i < items.length; i++) {
-        	if (items[i].nombre.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+          var nombre_completo = items[i].nombre + " " + items[i].apellido;
+        	if (nombre_completo.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
       	}
      	return found; //return array with mathced indexes
     },
     // List item Template7 template
     itemTemplate:
     '<li class="profile accordion-item">'+
-      '<a href="" class="item-link item-content">'+
+      '<div class="item-content item-input">'+
         '<div class="item-inner">'+
-          '<img src="images/elector/elector_profile.png" class="profile_image" width="25px">'+          
-          '<div class="item-title profile_name">{{nombre}}  {{apellido}}</div>'+
+          '<a href="" class="item-link item-content">'+
+            '<div class="row flex">'+
+              '<div class="col-100 tablet-30 profile_image">'+
+                '<img src="images/elector/elector_profile.png">'+
+              '</div>'+
+              '<div class="col-100 tablet-70 profile_info">'+
+                '<div class="profile_info_left col-80">'+
+                  '<div class="profile_name">'+
+                    '<span class="text">{{nombre}} {{apellido}}</span>'+
+                  '</div>'+
+                  '<div class="profile_option profile_estado">'+
+                    '<span class="text">Estado Civil</span><input type="text" name="profile_estado" value="{{estado_civil}}" readonly>'+
+                  '</div>'+
+                  '<div class="profile_option profile_hijos">'+
+                    '<span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="{{numero_hijos}}" readonly>'+
+                  '</div>'+
+                '</div>'+
+                '<div class="profile_info_right col-20">'+
+                  '<div class="profile_arrow">'+
+                    '<span class="icono icon-home_flecha"></span>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'+
+            '</div>'+
+          '</a>'+
+          '<div class="accordion-item-content">'+
+            '<div class="profile_buttons">'+
+              '<button class="col button button-small button-fill">Ver</button>'+
+              '<button class="col button button-small button-fill">Editar</button>'+
+              '<button class="col button button-small button-fill">Eliminar</button>'+
+            '</div>'+
+          '</div>'+
         '</div>'+
-      '</a>'+
-      '<div class="accordion-item-content">'+
-      	'<div class="profile_option profile_edad"><span class="text">Edad</span><input type="text" name="profile_edad" value="31" readonly></div>'+
-      	'<div class="profile_option profile_estado"><span class="text">Estado Civil</span><input type="text" name="profile_estado" value="{{estado_civil}}" readonly></div>'+
-      	'<div class="profile_option profile_hijos"><span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="{{numero_hijos}}" readonly></div>'+
       '</div>'+
     '</li>'
     //height: app.theme === 'ios' ? 63 : 73,
   });
 })
-
-
-
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
 / Use: setFormPage();
@@ -207,19 +233,44 @@ function saveElector()
   var credito_agricola        = $$('input[type=checkbox][name=credito_agricola]').val();
   var otros                   = $$('textarea[name=otro]').val();
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
-  var image                   = $$('input[type=text][name=nombres]').val();
-  
-  
-  var elector                 = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image};
-  console.log(elector);
-  if(validateForm())
-  {
-    var directorioTmp = app.params.template7Data['directorio'];
-    directorioTmp.push(elector);
-    app.params.template7Data['directorio'] = directorioTmp;
-
-    updateStorage();
-  }
+  var image;
+  toDataUrl(uploadimgdata, function(myBase64) {
+      //console.log(myBase64); // myBase64 is the base64 string
+      image               = myBase64;
+      var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image};
+      //console.log(elector);
+      if(validateForm() /*&& image*/)
+      {
+        var directorioTmp = app.params.template7Data['directorio'];
+        directorioTmp.push(elector);
+        app.params.template7Data['directorio'] = directorioTmp;
+        updateStorage();
+        app.router.back('/', {force: true, ignoreCache: true, reload: true})
+      }
+      else
+      {
+        console.log('no valido');
+        markEmpty();
+      }
+  });
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
+function toDataUrl(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
@@ -331,10 +382,30 @@ function removeRequire(element)
 / Use: removeRequire($$('input[type=text][name=discapacidad]'));
 / Description: Remueve el require al input dado
 /-----------------------------------------------------------------------------------------------------------------------*/
+function markEmpty()
+{
+  $('.form_content').find(':input[required]:visible').each(function() {
+    if (!this.value.trim()) {
+      console.log(this);
+      this.setCustomValidity('');
+    }
+  });
+  /*element.removeAttr('required');
+  element.removeAttr('validate');
+  element.removeClass('input-invalid');
+  element.parents('.item-content.item-input').removeClass('item-input-with-error-message');
+  element.parents('.item-content.item-input').removeClass('item-input-invalid');
+  element.parent('.item-input-wrap').find('.item-input-error-message').remove();*/
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
 function onPhotoFileSuccess(imageData) {
   //alert("onPhotoFileSuccess was called. imageData: "+imageData);
   // Get image handle
-  console.log(JSON.stringify(imageData));
+  //console.log(JSON.stringify(imageData));
   // Get image handle
   //
   var largeImage = document.getElementById('largeImage');
@@ -355,7 +426,7 @@ function onPhotoFileSuccess(imageData) {
 // Called when a photo is successfully retrieved
 //
 function onPhotoURISuccess(imageURI) {
-  alert("onPhotoURISuccess was called. imageuri: "+imageURI);
+  //alert("onPhotoURISuccess was called. imageuri: "+imageURI);
   // Uncomment to view the image file URI
   // console.log(imageURI);
   // Get image handle
