@@ -249,7 +249,6 @@ function saveElector()
       }
       else
       {
-        console.log('no valido');
         markEmpty();
       }
   });
@@ -386,7 +385,6 @@ function markEmpty()
 {
   $('.form_content').find(':input[required]:visible').each(function() {
     if (!this.value.trim()) {
-      console.log(this);
       app.input.validate(this);
     }
   });
@@ -396,9 +394,22 @@ function markEmpty()
 / Use: removeRequire($$('input[type=text][name=discapacidad]'));
 / Description: Remueve el require al input dado
 /-----------------------------------------------------------------------------------------------------------------------*/
-function markReadOnly()
+function disabledForm()
 {
-  
+  $('.form_content').find(':input').each(function() {
+    $(this).attr('disabled', true);
+  });
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+function enabledForm()
+{
+  $('.form_content').find(':input').each(function() {
+    $(this).attr('disabled', false);
+  });
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
