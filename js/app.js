@@ -109,9 +109,14 @@ function updateStorage()
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   
+  var directorio = [];
+  for (var i = 0; i < app.params.template7Data['directorio'].length; i++) {
+    if(app.params.template7Data['directorio'][i].borrado == 'null')
+    directorio.push(app.params.template7Data['directorio'][i]);
+  }
   var virtualList = app.virtualList.create({
     el: '.virtual-list',
-    items: app.params.template7Data['directorio'],
+    items: directorio,
     searchAll: function (query, items) {
         var found = [];
       	for (var i = 0; i < items.length; i++) {
@@ -156,7 +161,7 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
                       <div class="profile_buttons">\
                         <a href="/elector/{{index}}/0" class="col button button-small button-fill">Ver</a>\
                         <a href="/elector/{{index}}/1" class="col button button-small button-fill">Editar</a>\
-                        <a href="#" class="col button button-small button-fill">Eliminar</a>\
+                        <a href="#" onclick="deleteElector({{index}})" class="col button button-small button-fill">Eliminar</a>\
                       </div>\
                     </div>\
                   </div>\
@@ -164,45 +169,6 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
               </li>';
       return Template7.compile(tmpl)(obj);
     },
-    /*'<li class="profile accordion-item">'+
-      '<div class="item-content item-input">'+
-        '<div class="item-inner">'+
-          '<a href="" class="item-link item-content">'+
-            '<div class="row flex">'+
-              '<div class="col-100 tablet-30 profile_image">'+
-                '<img src="images/elector/elector_profile.png">'+
-              '</div>'+
-              '<div class="col-100 tablet-70 profile_info">'+
-                '<div class="profile_info_left col-80">'+
-                  '<div class="profile_name">'+
-                    '<span class="text">{{nombre}} {{apellido}}</span>'+
-                  '</div>'+
-                  '<div class="profile_option profile_estado">'+
-                    '<span class="text">Estado Civil</span><input type="text" name="profile_estado" value="{{estado_civil}}" readonly>'+
-                  '</div>'+
-                  '<div class="profile_option profile_hijos">'+
-                    '<span class="text">Cantidad de hijos</span><input type="text" name="profile_hijos" value="{{numero_hijos}}" readonly>'+
-                  '</div>'+
-                '</div>'+
-                '<div class="profile_info_right col-20">'+
-                  '<div class="profile_arrow">'+
-                    '<span class="icono icon-home_flecha"></span>'+
-                  '</div>'+
-                '</div>'+
-              '</div>'+
-            '</div>'+
-          '</a>'+
-          '<div class="accordion-item-content">'+
-            '<div class="profile_buttons">'+
-              '<a href="/form/{{@item}}" class="col button button-small button-fill">Ver</a>'+
-              '<button class="col button button-small button-fill">Editar</button>'+
-              '<button class="col button button-small button-fill">Eliminar</button>'+
-            '</div>'+
-          '</div>'+
-        '</div>'+
-      '</div>'+
-    '</li>'*/
-    //height: app.theme === 'ios' ? 63 : 73,
   });
 
 })
@@ -226,7 +192,7 @@ function validateForm()
 / Use: setFormPage();
 / Description: Inicializa todos los inputs del form que lo requieran.
 /-----------------------------------------------------------------------------------------------------------------------*/
-function saveElector()
+function saveElector(type)
 {
   var encuestador             = JSON.parse(localStorage.getItem('usuario')).usuario;
   var nombre                  = $$('input[type=text][name=nombres]').val();
@@ -282,13 +248,21 @@ function saveElector()
   toDataUrl(uploadimgdata, function(myBase64) {
       //console.log(myBase64); // myBase64 is the base64 string
       image               = myBase64;
-      var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0};
+      var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
       //console.log(elector);
       if(validateForm() /*&& image*/)
       {
-        var directorioTmp = app.params.template7Data['directorio'];
-        directorioTmp.push(elector);
-        app.params.template7Data['directorio'] = directorioTmp;
+        if(type == 'save')
+        {
+          var directorioTmp = app.params.template7Data['directorio'];
+          directorioTmp.push(elector);
+          app.params.template7Data['directorio'] = directorioTmp;
+        }
+        else
+        {
+          elector.editado = new Date().toISOString().slice(0, 19).replace('T', ' ');
+          app.params.template7Data['directorio'][app.params.template7Data['userId']] = elector;
+        }
         updateStorage();
         app.router.back('/', {force: true, ignoreCache: true, reload: true})
       }
@@ -296,6 +270,21 @@ function saveElector()
       {
         markEmpty();
       }
+  });
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
+function deleteElector(index)
+{
+  app.params.template7Data['directorio'][index].borrado = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  updateStorage();
+  app.router.back('/directorio/', {
+    force: true,
+    reload: true,
+    ignoreCache: true,
   });
 }
 /*----------------------------------------------------------------------------------------------------------------------
@@ -341,13 +330,47 @@ function setHomePage()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function setElectorPage()
 {
-  //Calendario Fecha de nacimiento
-  create_birthdate_calendar();
-  console.log(app.params.template7Data['editable']);
+  setFormPage();
+  //Input de discapacidad
+  if ($$('input[type=radio][name=discapacidad]:checked').val() == 'no')
+    removeRequire($$('input[type=text][name=discapacidad]'));
+  //Input de whatsapp
+  if ($$('input[type=radio][name=tiene_whatsapp]:checked').val() == 'no')
+    removeRequire($$('input[type=text][name=numero_whatsapp]'));
+  //Input de Facebook
+  if ($$('input[type=radio][name=tiene_facebook]:checked').val() == 'no')
+    removeRequire($$('input[type=text][name=user_facebook]'));
+  //Input de Instagram
+  if ($$('input[type=radio][name=tiene_instagram]:checked').val() == 'no')
+    removeRequire($$('input[type=text][name=user_instagram]'));
+  //Input de Twitter
+  if ($$('input[type=radio][name=tiene_twitter]:checked').val() == 'no')
+      removeRequire($$('input[type=text][name=user_twitter]'));
+  //Input de Vehículo
+  if ($$('input[type=radio][name=tiene_vehiculo]:checked').val() == 'no')
+    removeRequire($$('input[type=text][name=placa]'));
   if(!app.params.template7Data['editable'])
+  {
     disabledForm();
+    $$('.elector_update_button').css('display','none');
+    $$('#elector_edit_button').removeAttr('disabled');
+    $$('#elector_edit_button').on('click', function () {
+      enabledForm();
+      $$('.elector_edit_button').css('display','none');
+      $$('.elector_update_button').css('display','block');
+      $$('#elector_update_button').removeAttr('disabled');
+      $$('#elector_update_button').on('click', function () {
+        saveElector('update');
+      });
+    });
+  }
   else
-    enabledForm();
+  {
+    $$('.elector_edit_button').css('display','none');
+    $$('#elector_update_button').on('click', function () {
+      saveElector('update');
+    });
+  }
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
@@ -407,7 +430,7 @@ function setFormPage()
   });
   //Guardar Registro
   $$('#form_save_button').on('click', function () {
-    saveElector();
+    saveElector('save');
   });
 }
 /*----------------------------------------------------------------------------------------------------------------------
@@ -428,6 +451,7 @@ function create_birthdate_calendar()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function addRequire(element)
 {
+  element.removeAttr('readonly');
   element.attr('required','true');
   element.attr('validate','true');
 }
@@ -438,6 +462,8 @@ function addRequire(element)
 /-----------------------------------------------------------------------------------------------------------------------*/
 function removeRequire(element)
 {
+  element.val('');
+  element.attr('readonly','readonly');
   element.removeAttr('required');
   element.removeAttr('validate');
   element.removeClass('input-invalid');
@@ -477,7 +503,7 @@ function disabledForm()
 function enabledForm()
 {
   $('.form_content').find(':input').each(function() {
-    $(this).attr('disabled', false);
+    $(this).removeAttr('disabled');
   });
 }
 /*----------------------------------------------------------------------------------------------------------------------

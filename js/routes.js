@@ -52,7 +52,7 @@ routes = [
 
       // User ID from request
       var userId = routeTo.params.id;
-
+      app.params.template7Data['userId'] = userId;
       // Simulate Ajax Request
       setTimeout(function () {
         // We got user data from request
@@ -63,7 +63,6 @@ routes = [
         // Hide Preloader
         app.preloader.hide();
         //If Editable
-        console.log(routeTo.params.editable);
         if(routeTo.params.editable == 0)
           app.params.template7Data['editable'] = false;
         else
