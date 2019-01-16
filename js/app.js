@@ -64,6 +64,7 @@ $$('#my-login-screen .login-button').on('click', function () {
         //console.log(localStorage.getItem('usuario'));
         // Close login screen
         app.loginScreen.close('#my-login-screen');
+        app.preloader.show();
         loadDirectorio();
       }
       else
@@ -92,8 +93,8 @@ function login(){
  * LOAD DIRECTORIO
  */
 function loadDirectorio(){
-  app.preloader.show();
   disabledForm();
+  $('#home_footer_text').html('Cargando directorio, espere un momento por favor...');
 	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
     app.preloader.hide();
     enabledForm();
@@ -323,6 +324,7 @@ function setHomePage()
     if(localStorage.getItem('directorio')){
       app.params.template7Data['directorio'] = JSON.parse(localStorage.getItem('directorio'));
     }else{
+      app.preloader.show();
       loadDirectorio();
     }
   }
@@ -615,6 +617,7 @@ function uploadElector(index,directorio)
 {
   if(index >= directorio.length)
   {
+    app.preloader.show();
     $('#home_footer_text').html('Transferencia completada.');
     loadDirectorio();
     return;
