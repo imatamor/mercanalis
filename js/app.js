@@ -154,9 +154,9 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
                     </a>\
                     <div class="accordion-item-content">\
                       <div class="profile_buttons">\
-                        <a href="/elector/{{index}}/" class="col button button-small button-fill">Ver</a>\
-                        <button class="col button button-small button-fill">Editar</button>\
-                        <button class="col button button-small button-fill">Eliminar</button>\
+                        <a href="/elector/{{index}}/0" class="col button button-small button-fill">Ver</a>\
+                        <a href="/elector/{{index}}/1" class="col button button-small button-fill">Editar</a>\
+                        <a href="#" class="col button button-small button-fill">Eliminar</a>\
                       </div>\
                     </div>\
                   </div>\
@@ -343,6 +343,11 @@ function setElectorPage()
 {
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
+  console.log(app.params.template7Data['editable']);
+  if(!app.params.template7Data['editable'])
+    disabledForm();
+  else
+    enabledForm();
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage

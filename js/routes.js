@@ -39,7 +39,7 @@ routes = [
     }
   },*/
   {
-    path: '/elector/:id/',
+    path: '/elector/:id/:editable',
     async: function (routeTo, routeFrom, resolve, reject) {
       // Router instance
       var router = this;
@@ -62,7 +62,12 @@ routes = [
         var checkBox  = setCheckBox(user);
         // Hide Preloader
         app.preloader.hide();
-
+        //If Editable
+        console.log(routeTo.params.editable);
+        if(routeTo.params.editable == 0)
+          app.params.template7Data['editable'] = false;
+        else
+          app.params.template7Data['editable'] = true;  
         // Resolve route to load page
         resolve(
           {

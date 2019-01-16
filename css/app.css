@@ -229,7 +229,7 @@
 	display: flex;
 	float: right;
 }
-.profile_buttons button
+.profile_buttons button, .profile_buttons a
 {
 	margin-right: 10px;
 	background-color: #ededed!important;
