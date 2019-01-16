@@ -96,6 +96,7 @@ function loadDirectorio(){
   disabledForm();
   $('#home_footer_text').html('Cargando directorio, espere un momento por favor...');
 	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
+    $('#home_footer_text').html('Proceso terminado.');
     app.preloader.hide();
     enabledForm();
     localStorage.setItem('directorio', data);
@@ -140,7 +141,7 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
                     <a href="" class="item-link item-content">\
                       <div class="row flex">\
                         <div class="col-100 tablet-30 profile_image">\
-                          <img src="images/elector/elector_profile.png">\
+                          <img src="{{image}}">\
                         </div>\
                         <div class="col-100 tablet-70 profile_info">\
                           <div class="profile_info_left col-80">\
