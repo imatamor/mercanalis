@@ -88,6 +88,9 @@ $$('#my-login-screen .login-button').on('click', function () {
 function login(){
   if(!localStorage.getItem('usuario'))
     app.loginScreen.open('#my-login-screen', true);
+  else
+    $('#home_footer_text').html("Bienvenido "+ JSON.parse(localStorage.getItem('usuario')).nombre);
+
 }
 /**
  * ----------------------------------------
@@ -96,7 +99,7 @@ function login(){
 function loadDirectorio(){
   disabledForm();
   $('#home_footer_text').html('Cargando directorio, espere un momento por favor...');
-	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', localStorage.getItem('usuario'),function (data) {
+	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', JSON.parse(localStorage.getItem('usuario')),function (data) {
     $('#home_footer_text').html('Proceso terminado.');
     app.preloader.hide();
     enabledForm();
@@ -256,9 +259,9 @@ function saveElector(type)
   toDataUrl(uploadimgdata, function(myBase64) {
       //console.log(myBase64); // myBase64 is the base64 string
       image               = myBase64;
-      var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
+      var elector         = {'id':'null', 'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
       //console.log(elector);
-      if(validateForm() && image)
+      if(validateForm() /*&& image*/)
       {
         if(type == 'save')
         {
@@ -268,6 +271,7 @@ function saveElector(type)
         }
         else
         {
+          elector.id = app.params.template7Data['directorio'][app.params.template7Data['userId']].id;
           elector.uploaded = 0;
           elector.editado = new Date().toISOString().slice(0, 19).replace('T', ' ');
           app.params.template7Data['directorio'][app.params.template7Data['userId']] = elector;
@@ -392,10 +396,10 @@ function setElectorPage()
 function setFormPage()
 {
   //Camara
-  pictureSource   = navigator.camera.PictureSourceType;
+  /*pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
