@@ -20,8 +20,10 @@ var app  = new Framework7({
       console.log(page.name);
       if(page.name == "home")
         setHomePage();
-      if(page.name == "form")
+      else if(page.name == "form")
         setFormPage();
+      else if(page.name == "elector")
+        setElectorPage();
     }
   }
 });
@@ -204,7 +206,6 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   });
 
 })
-
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
 / Use: setFormPage();
@@ -265,8 +266,16 @@ function saveElector()
   var tiene_casa_propia       = $$('input[type=radio][name=tiene_casa_propia]:checked').val();
   var tiene_vehiculo          = $$('input[type=radio][name=tiene_vehiculo]:checked').val();
   var placa                   = $$('input[type=text][name=placa]').val();
-  var seguro_medico           = $$('input[type=checkbox][name=seguro_medico]').val();
-  var credito_agricola        = $$('input[type=checkbox][name=credito_agricola]').val();
+  var seguro_medico;
+  if($('input[type=checkbox][name=seguro_medico]').is(':checked'))
+    seguro_medico           = 'si';
+  else
+    seguro_medico           = 'no';
+  var credito_agricola;
+  if($('input[type=checkbox][name=credito_agricola]').is(':checked'))
+    credito_agricola           = 'si';
+  else
+    credito_agricola           = 'no';
   var otros                   = $$('textarea[name=otro]').val();
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
   var image;
@@ -324,6 +333,16 @@ function setHomePage()
     }
   }
   $$('#upload_directory').on('click', uploadDirectorio);
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
+function setElectorPage()
+{
+  //Calendario Fecha de nacimiento
+  create_birthdate_calendar();
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
