@@ -142,7 +142,8 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
                     <a href="" class="item-link item-content">\
                       <div class="row flex">\
                         <div class="col-100 tablet-30 profile_image">\
-                          <img src="{{image}}">\
+                          <div class="profile_image_holder" style="background-image: url({{image}});">\
+                          </div>\
                         </div>\
                         <div class="col-100 tablet-70 profile_info">\
                           <div class="profile_info_left col-80">\
