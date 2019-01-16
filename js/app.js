@@ -111,7 +111,7 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   
   var directorio = [];
   for (var i = 0; i < app.params.template7Data['directorio'].length; i++) {
-    if(app.params.template7Data['directorio'][i].borrado == 'null')
+    if(app.params.template7Data['directorio'][i].borrado == null)
     directorio.push(app.params.template7Data['directorio'][i]);
   }
   var virtualList = app.virtualList.create({
@@ -268,6 +268,7 @@ function saveElector(type)
       }
       else
       {
+        $('.feedback_form').html("Debes llenar todos los campos requeridos para continuar");
         markEmpty();
       }
   });
@@ -281,9 +282,9 @@ function deleteElector(index)
 {
   app.params.template7Data['directorio'][index].borrado = new Date().toISOString().slice(0, 19).replace('T', ' ');
   updateStorage();
-  app.router.back('/directorio/', {
+  app.router.navigate('/directorio/', {
     force: true,
-    reload: true,
+    reloadCurrent: true,
     ignoreCache: true,
   });
 }
