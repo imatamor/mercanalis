@@ -60,6 +60,7 @@ $$('#my-login-screen .login-button').on('click', function () {
       if(submitResponse[0].valid == 1)
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
+        $('#home_footer_text').html("Bienvenido "+ submitResponse[0].nombre);
         localStorage.setItem('usuario', JSON.stringify(submitResponse[0]));
         //console.log(localStorage.getItem('usuario'));
         // Close login screen
@@ -95,7 +96,7 @@ function login(){
 function loadDirectorio(){
   disabledForm();
   $('#home_footer_text').html('Cargando directorio, espere un momento por favor...');
-	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
+	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', localStorage.getItem('usuario'),function (data) {
     $('#home_footer_text').html('Proceso terminado.');
     app.preloader.hide();
     enabledForm();
@@ -266,6 +267,7 @@ function saveElector(type)
         }
         else
         {
+          elector.uploaded = 0;
           elector.editado = new Date().toISOString().slice(0, 19).replace('T', ' ');
           app.params.template7Data['directorio'][app.params.template7Data['userId']] = elector;
         }
@@ -286,6 +288,7 @@ function saveElector(type)
 /-----------------------------------------------------------------------------------------------------------------------*/
 function deleteElector(index)
 {
+  app.params.template7Data['directorio'][index].uploaded = 0;
   app.params.template7Data['directorio'][index].borrado = new Date().toISOString().slice(0, 19).replace('T', ' ');
   updateStorage();
   app.router.navigate('/directorio/', {
@@ -625,9 +628,7 @@ function uploadElector(index,directorio)
   }
   var currentIndex = index;
   while(directorio[currentIndex].uploaded != 0)
-  {
     currentIndex++;
-  }
   var elector = directorio[currentIndex];
   app.request.post('http://138.197.154.196/mercanalis/saveElector.php',
   elector,
