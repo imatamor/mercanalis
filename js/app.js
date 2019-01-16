@@ -645,7 +645,7 @@ function uploadElector(index,directorio)
   },
   function(error)
   {
-    $('#home_footer_text').html('Error en la transferencia, compruebe su conección a Internet');
+    $('#home_footer_text').html('Error en la transferencia, compruebe su conexión a Internet');
     console.log(error);
   });
 }
