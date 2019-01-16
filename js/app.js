@@ -105,8 +105,6 @@ function loadDirectorio(){
 function updateStorage()
 {
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
-  console.log('local storage');
-  console.log(localStorage.getItem('directorio'));
 } 
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
@@ -627,7 +625,7 @@ function uploadElector(index,directorio)
   elector,
   function(response)
   {
-    //console.log(response);
+    console.log(response);
     var nextIndex = currentIndex + 1;
     uploadElector(nextIndex,directorio);
   },
