@@ -105,13 +105,15 @@ function loadDirectorio(){
 function updateStorage()
 {
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
+  console.log('local storage');
+  console.log(localStorage.getItem('directorio'));
 } 
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   
   var directorio = [];
   for (var i = 0; i < app.params.template7Data['directorio'].length; i++) {
-    if(app.params.template7Data['directorio'][i].borrado == null)
+    if(app.params.template7Data['directorio'][i].borrado == null || app.params.template7Data['directorio'][i].borrado == 'null')
     directorio.push(app.params.template7Data['directorio'][i]);
   }
   var virtualList = app.virtualList.create({
