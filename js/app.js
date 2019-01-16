@@ -92,10 +92,14 @@ function login(){
  * LOAD DIRECTORIO
  */
 function loadDirectorio(){
+  app.preloader.show();
+  disabledForm();
 	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
-   localStorage.setItem('directorio', data);
-   var stDirectorio = localStorage.getItem('directorio');
-   app.params.template7Data['directorio'] = JSON.parse(stDirectorio);
+    app.preloader.hide();
+    enabledForm();
+    localStorage.setItem('directorio', data);
+    var stDirectorio = localStorage.getItem('directorio');
+    app.params.template7Data['directorio'] = JSON.parse(stDirectorio);
 	});
 }
 /**
@@ -601,7 +605,6 @@ function uploadDirectorio()
   $('#home_footer_text').html('Subiendo, Este proceso podría tomar varios minutos...');
   var directorioTmp = app.params.template7Data['directorio'];
   uploadElector(0,directorioTmp);
-  loadDirectorio();
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
@@ -613,6 +616,7 @@ function uploadElector(index,directorio)
   if(index >= directorio.length)
   {
     $('#home_footer_text').html('Transferencia completada.');
+    loadDirectorio();
     return;
   }
   var currentIndex = index;
