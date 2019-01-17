@@ -271,7 +271,9 @@ function saveElector(type)
         }
         else
         {
+          console.log(1);
           elector.id = app.params.template7Data['directorio'][app.params.template7Data['userId']].id;
+          console.log(elector.id);
           elector.uploaded = 0;
           elector.editado = new Date().toISOString().slice(0, 19).replace('T', ' ');
           console.log(elector);
