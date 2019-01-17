@@ -54,7 +54,8 @@ $$('#my-login-screen .login-button').on('click', function () {
     };
     $('.feedback_login').html("Espere un momento por favor...");
     $('.feedback_section_login').show();
-    $.post("http://138.197.154.196/mercanalis/login.php", data)
+    //$.post("http://138.197.154.196/mercanalis/login.php", data)
+    $.post("https://www.maruridigital.com/mercanalis/app/services/login.php", data)
     .done(function(submitResponse) 
     {
       //console.log(submitResponse);
@@ -100,7 +101,7 @@ function login(){
 function loadDirectorio(){
   disabledForm();
   $('#home_footer_text').html('Cargando directorio, espere un momento por favor...');
-	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', JSON.parse(localStorage.getItem('usuario')),function (data) {
+	app.request.get('https://www.maruridigital.com/mercanalis/app/services/getElectores.php', JSON.parse(localStorage.getItem('usuario')),function (data) {
     $('#home_footer_text').html('Proceso terminado.');
     app.preloader.hide();
     enabledForm();
@@ -349,6 +350,35 @@ function toDataUrl(url, callback) {
     xhr.open('GET', url);
     xhr.responseType = 'blob';
     xhr.send();
+}
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: setFormPage
+/ Use: setFormPage();
+/ Description: Inicializa todos los inputs del form que lo requieran.
+/-----------------------------------------------------------------------------------------------------------------------*/
+function getBase64Image(img) {
+
+  var maxWidth = 600; // Max width for the image
+  var maxHeight = 600;    // Max height for the image
+  var ratio = 0;  // Used for aspect ratio
+  var width = img.width;    // Current image width
+  var height = img.height;  // Current image height
+
+  // Check if the current width is larger than the max
+  if(width > maxWidth){
+    ratio = maxWidth / width;   // get ratio for scaling image
+    $(this).css("width", maxWidth); // Set new width
+    $(this).css("height", height * ratio);  // Scale height based on ratio
+    height = height * ratio;    // Reset height to match scaled image
+    width = width * ratio;    // Reset width to match scaled image
+  }
+  var canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
@@ -694,7 +724,7 @@ function uploadElector(index,directorio)
     return;
   }
   var elector = directorio[currentIndex];
-  app.request.post('http://138.197.154.196/mercanalis/saveElector.php',
+  app.request.post('https://www.maruridigital.com/mercanalis/app/services/saveElector.php',
   elector,
   function(response)
   {
