@@ -208,6 +208,7 @@ function saveElector(type)
   $('#elector_update_button').attr('disabled','true');
   $('#form_save_button').attr('disabled','true');
   console.log('Entro a saveElector');
+  console.log(0);
   var encuestador             = JSON.parse(localStorage.getItem('usuario')).usuario;
   console.log(encuestador);
   var nombre                  = $$('input[type=text][name=nombres]').val();
