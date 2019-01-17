@@ -9,7 +9,7 @@ include('db.php');
 extract($_REQUEST);
 
 $db 		= new db();
-$sql 		= "SELECT `usuario`, `nombre`, `apellido`, `cedula`, `fecha_nacimiento`, `nombre_carnet`, `nombre_familia`, `ciudad`, `canton`, `parroquia`, `barrio`, `sector`, `direccion`, `estado_civil`, `numero_hijos`, `tiene_discapacidad`, `discapacidad`, `ocupacion`, `profesion`, `nivel_escolaridad`, `capacitacion_deseada`, `tiene_bono_gobierno`, `tiene_bono_municipio`, `telefono_convencional`, `telefono_celular`, `telefono_compania`, `tiene_whatsapp`, `whatsapp`, `tiene_facebook`, `facebook`, `tiene_instagram`, `instagram`, `tiene_twitter`, `twitter`, `correo_electronico`, `tiene_casa_propia`, `tiene_vehiculo`, `placa`, `seguro_medico`, `credito_agricola`, `otros`, `numero_contrato`, `image`, `uploaded`, `creado`, `editado`, `borrado`, `activo` FROM elector;";
+$sql 		= "SELECT `usuario`, `nombre`, `apellido`, `cedula`, `fecha_nacimiento`, `nombre_carnet`, `nombre_familia`, `ciudad`, `canton`, `parroquia`, `barrio`, `sector`, `direccion`, `estado_civil`, `numero_hijos`, `tiene_discapacidad`, `discapacidad`, `ocupacion`, `profesion`, `nivel_escolaridad`, `capacitacion_deseada`, `tiene_bono_gobierno`, `tiene_bono_municipio`, `telefono_convencional`, `telefono_celular`, `telefono_compania`, `tiene_whatsapp`, `whatsapp`, `tiene_facebook`, `facebook`, `tiene_instagram`, `instagram`, `tiene_twitter`, `twitter`, `correo_electronico`, `tiene_casa_propia`, `tiene_vehiculo`, `placa`, `seguro_medico`, `credito_agricola`, `otros`, `numero_contrato`, `image`, `uploaded`, `creado`, `editado`, `borrado`, `activo` FROM elector WHERE `usuario` = '".$db->parametro($usuario)."';";
 
 $response 	= $db->Select(utf8_decode($sql));
 

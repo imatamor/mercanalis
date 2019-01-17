@@ -88,7 +88,7 @@
 }
 .home_footer
 {
-	font-size: 1.4em;
+	font-size: 1.3em;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	text-align: center;
@@ -173,11 +173,25 @@
 }
 .profile_image
 {
+	display: flex;
+	justify-content: center;
+}
+.profile_image
+{
 	text-align: center;
+}
+.profile_image_holder
+{
+	width: 150px;
+	height: 150px;
+	background-position: center center;
+	border-radius: 85px;
+	background-size: cover;
 }
 .profile_image img
 {
-	width: 150px;
+	/*width: 150px;
+	border-radius: 85px;*/
 }
 .profile_info
 {

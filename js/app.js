@@ -17,7 +17,7 @@ var app  = new Framework7({
   on: {
     pageInit(page) {
       //console.log(app.params.template7Data);
-      console.log(page.name);
+      //console.log(page.name);
       if(page.name == "home")
         setHomePage();
       else if(page.name == "form")
@@ -60,10 +60,12 @@ $$('#my-login-screen .login-button').on('click', function () {
       if(submitResponse[0].valid == 1)
       {
         $('.feedback_login').html("Bienvenido "+ submitResponse[0].nombre);
+        $('#home_footer_text').html("Bienvenido "+ submitResponse[0].nombre);
         localStorage.setItem('usuario', JSON.stringify(submitResponse[0]));
         //console.log(localStorage.getItem('usuario'));
         // Close login screen
         app.loginScreen.close('#my-login-screen');
+        app.preloader.show();
         loadDirectorio();
       }
       else
@@ -86,16 +88,24 @@ $$('#my-login-screen .login-button').on('click', function () {
 function login(){
   if(!localStorage.getItem('usuario'))
     app.loginScreen.open('#my-login-screen', true);
+  else
+    $('#home_footer_text').html("Bienvenido "+ JSON.parse(localStorage.getItem('usuario')).nombre);
+
 }
 /**
  * ----------------------------------------
  * LOAD DIRECTORIO
  */
 function loadDirectorio(){
-	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', function (data) {
-   localStorage.setItem('directorio', data);
-   var stDirectorio = localStorage.getItem('directorio');
-   app.params.template7Data['directorio'] = JSON.parse(stDirectorio);
+  disabledForm();
+  $('#home_footer_text').html('Cargando directorio, espere un momento por favor...');
+	app.request.get('http://138.197.154.196/mercanalis/getElectores.php', JSON.parse(localStorage.getItem('usuario')),function (data) {
+    $('#home_footer_text').html('Proceso terminado.');
+    app.preloader.hide();
+    enabledForm();
+    localStorage.setItem('directorio', data);
+    var stDirectorio = localStorage.getItem('directorio');
+    app.params.template7Data['directorio'] = JSON.parse(stDirectorio);
 	});
 }
 /**
@@ -111,7 +121,7 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   
   var directorio = [];
   for (var i = 0; i < app.params.template7Data['directorio'].length; i++) {
-    if(app.params.template7Data['directorio'][i].borrado == null)
+    if(app.params.template7Data['directorio'][i].borrado == null || app.params.template7Data['directorio'][i].borrado == 'null')
     directorio.push(app.params.template7Data['directorio'][i]);
   }
   var virtualList = app.virtualList.create({
@@ -135,7 +145,8 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
                     <a href="" class="item-link item-content">\
                       <div class="row flex">\
                         <div class="col-100 tablet-30 profile_image">\
-                          <img src="images/elector/elector_profile.png">\
+                          <div class="profile_image_holder" style="background-image: url({{image}});">\
+                          </div>\
                         </div>\
                         <div class="col-100 tablet-70 profile_info">\
                           <div class="profile_info_left col-80">\
@@ -248,8 +259,8 @@ function saveElector(type)
   toDataUrl(uploadimgdata, function(myBase64) {
       //console.log(myBase64); // myBase64 is the base64 string
       image               = myBase64;
-      var elector         = {'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
-      console.log(elector);
+      var elector         = {'id':'null', 'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
+      //console.log(elector);
       if(validateForm() && image)
       {
         if(type == 'save')
@@ -260,11 +271,14 @@ function saveElector(type)
         }
         else
         {
+          elector.id = app.params.template7Data['directorio'][app.params.template7Data['userId']].id;
+          elector.uploaded = 0;
           elector.editado = new Date().toISOString().slice(0, 19).replace('T', ' ');
+          console.log(elector);
           app.params.template7Data['directorio'][app.params.template7Data['userId']] = elector;
         }
         updateStorage();
-        app.router.back('/', {force: true, ignoreCache: true, reload: true})
+        app.router.back('/', {force: true, ignoreCache: true, reload: true});
       }
       else
       {
@@ -280,6 +294,7 @@ function saveElector(type)
 /-----------------------------------------------------------------------------------------------------------------------*/
 function deleteElector(index)
 {
+  app.params.template7Data['directorio'][index].uploaded = 0;
   app.params.template7Data['directorio'][index].borrado = new Date().toISOString().slice(0, 19).replace('T', ' ');
   updateStorage();
   app.router.navigate('/directorio/', {
@@ -319,6 +334,7 @@ function setHomePage()
     if(localStorage.getItem('directorio')){
       app.params.template7Data['directorio'] = JSON.parse(localStorage.getItem('directorio'));
     }else{
+      app.preloader.show();
       loadDirectorio();
     }
   }
@@ -601,7 +617,6 @@ function uploadDirectorio()
   $('#home_footer_text').html('Subiendo, Este proceso podría tomar varios minutos...');
   var directorioTmp = app.params.template7Data['directorio'];
   uploadElector(0,directorioTmp);
-  loadDirectorio();
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
@@ -612,14 +627,14 @@ function uploadElector(index,directorio)
 {
   if(index >= directorio.length)
   {
+    app.preloader.show();
     $('#home_footer_text').html('Transferencia completada.');
+    loadDirectorio();
     return;
   }
   var currentIndex = index;
   while(directorio[currentIndex].uploaded != 0)
-  {
     currentIndex++;
-  }
   var elector = directorio[currentIndex];
   app.request.post('http://138.197.154.196/mercanalis/saveElector.php',
   elector,
@@ -631,6 +646,7 @@ function uploadElector(index,directorio)
   },
   function(error)
   {
+    $('#home_footer_text').html('Error en la transferencia, compruebe su conexión a Internet');
     console.log(error);
   });
 }
