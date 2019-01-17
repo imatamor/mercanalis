@@ -119,7 +119,7 @@ function updateStorage()
   //console.log(JSON.stringify(app.params.template7Data['directorio']));
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
   console.log('localStorage.getItem(directorio)');
-  //console.log(localStorage.getItem('directorio'));
+  console.log(localStorage.getItem('directorio'));
 } 
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
@@ -299,7 +299,7 @@ function saveElector(type)
       $('#form_save_button').removeAttr('disabled');
       console.log('antes update');
       updateStorage();
-      console.log('antes update');
+      console.log('despues update');
       app.router.back('/', {force: true, ignoreCache: true, reload: true});
       console.log('despues del back');
     }
