@@ -368,6 +368,7 @@ function setElectorPage()
 {
   setFormPage();
   image = app.params.template7Data['directorio'][app.params.template7Data['userId']].image;
+  console.log(image);
   //Input de discapacidad
   if ($$('input[type=radio][name=discapacidad]:checked').val() == 'no')
     removeRequire($$('input[type=text][name=discapacidad]'));
