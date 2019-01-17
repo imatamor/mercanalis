@@ -115,7 +115,11 @@ function loadDirectorio(){
 */
 function updateStorage()
 {
+  console.log('app.params.template7Data[directorio]');
+  console.log(JSON.stringify(app.params.template7Data['directorio']));
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
+  console.log('localStorage.getItem(directorio)');
+  console.log(localStorage.getItem('directorio'));
 } 
 
 $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
