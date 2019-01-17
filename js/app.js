@@ -246,21 +246,28 @@ function saveElector(type)
   var tiene_casa_propia       = $$('input[type=radio][name=tiene_casa_propia]:checked').val();
   var tiene_vehiculo          = $$('input[type=radio][name=tiene_vehiculo]:checked').val();
   var placa                   = $$('input[type=text][name=placa]').val();
+  console.log(1);
   var seguro_medico;
   if($('input[type=checkbox][name=seguro_medico]').is(':checked'))
     seguro_medico           = 'si';
   else
     seguro_medico           = 'no';
+  console.log(2);
   var credito_agricola;
   if($('input[type=checkbox][name=credito_agricola]').is(':checked'))
     credito_agricola           = 'si';
   else
     credito_agricola           = 'no';
+  console.log(3);
   var otros                   = $$('textarea[name=otro]').val();
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
   var image;
+  console.log(4);
+  
   console.log(uploadimgdata);
+  console.log(5);
   toDataUrl(uploadimgdata, function(myBase64) {
+    console.log(6);
       //console.log(myBase64); // myBase64 is the base64 string
       image               = myBase64;
       var elector         = {'id':'null', 'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
