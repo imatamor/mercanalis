@@ -210,6 +210,7 @@ function validateForm()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function saveElector(type)
 {
+  $('.feedback_form').html("Guardando espere por favor");
   $('#elector_update_button').attr('disabled','true');
   $('#form_save_button').attr('disabled','true');
   console.log('Entro a saveElector');
