@@ -205,6 +205,9 @@ function validateForm()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function saveElector(type)
 {
+  $('#elector_update_button').attr('disabled','true');
+  $('#form_save_button').attr('disabled','true');
+  
   var encuestador             = JSON.parse(localStorage.getItem('usuario')).usuario;
   var nombre                  = $$('input[type=text][name=nombres]').val();
   var apellido                = $$('input[type=text][name=apellidos]').val();
@@ -280,6 +283,8 @@ function saveElector(type)
           console.log(elector);
           app.params.template7Data['directorio'][app.params.template7Data['userId']] = elector;
         }
+        $('#elector_update_button').removeAttr('disabled');
+        $('#form_save_button').removeAttr('disabled');
         updateStorage();
         app.router.back('/', {force: true, ignoreCache: true, reload: true});
       }
