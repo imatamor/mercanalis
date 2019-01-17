@@ -209,9 +209,11 @@ function saveElector(type)
   $('#form_save_button').attr('disabled','true');
   console.log('Entro a saveElector');
   var encuestador             = JSON.parse(localStorage.getItem('usuario')).usuario;
+  console.log(encuestador);
   var nombre                  = $$('input[type=text][name=nombres]').val();
   var apellido                = $$('input[type=text][name=apellidos]').val();
   var cedula                  = $$('input[type=text][name=cedula]').val();
+  console.log(nombre);
   var fecha_nacimiento        = $$('input[type=text][name=fecha_nacimiento]').val();
   var nombre_carnet           = $$('input[type=text][name=nombre_carnet]').val();
   var nombre_familia          = $$('input[type=text][name=nombre_familia]').val();
