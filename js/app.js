@@ -656,6 +656,13 @@ function uploadDirectorio()
 function uploadElector(index,directorio)
 {
   console.log(index);
+  if(index >= directorio.length)
+  {
+    app.preloader.show();
+    $('#home_footer_text').html('Transferencia completada.');
+    loadDirectorio();
+    return;
+  }
   var currentIndex = index;
   while(directorio[currentIndex].uploaded != 0)
   {
