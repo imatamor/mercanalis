@@ -653,6 +653,7 @@ function uploadDirectorio()
 /-----------------------------------------------------------------------------------------------------------------------*/
 function uploadElector(index,directorio)
 {
+  console.log(index);
   var currentIndex = index;
   while(directorio[currentIndex].uploaded != 0)
   {
