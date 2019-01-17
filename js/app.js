@@ -292,8 +292,11 @@ function saveElector(type)
       }
       $('#elector_update_button').removeAttr('disabled');
       $('#form_save_button').removeAttr('disabled');
+      console.log('antes update');
       updateStorage();
+      console.log('antes update');
       app.router.back('/', {force: true, ignoreCache: true, reload: true});
+      console.log('despues del back');
     }
     else
     {
