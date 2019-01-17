@@ -297,6 +297,8 @@ function saveElector(type)
     }
     else
     {
+      $('#elector_update_button').removeAttr('disabled');
+      $('#form_save_button').removeAttr('disabled');
       $('.feedback_form').html("Debes llenar todos los campos requeridos para continuar");
       markEmpty();
     }
