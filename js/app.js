@@ -361,8 +361,8 @@ function getBase64Image(img) {
   var maxWidth = 600; // Max width for the image
   var maxHeight = 600;    // Max height for the image
   var ratio = 0;  // Used for aspect ratio
-  var width = img.width;    // Current image width
-  var height = img.height;  // Current image height
+  var width = img.width();    // Current image width
+  var height = img.height();  // Current image height
 
   console.log(img);
   console.log(width);
@@ -616,7 +616,7 @@ function onPhotoFileSuccess(imageData) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  image = getBase64Image(document.getElementById('largeImage'));
+  image = getBase64Image(largeImage);
   console.log('image');
   console.log(image);
 }
@@ -656,7 +656,7 @@ function onPhotoURISuccess(imageURI) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  image = getBase64Image(document.getElementById('largeImage'));
+  image = getBase64Image(largeImage);
   console.log('image');
   console.log(image);
 }
