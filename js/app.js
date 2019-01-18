@@ -392,6 +392,7 @@ function getBase64Image(img) {
   return dataURL;
 }
 function convertImgToBase64URL(url, callback, outputFormat){
+    console.log(url);
     var img = new Image();
     img.crossOrigin = 'Anonymous';
     img.onload = function(){
@@ -399,6 +400,9 @@ function convertImgToBase64URL(url, callback, outputFormat){
         ctx = canvas.getContext('2d'), dataURL;
         canvas.height = img.height;
         canvas.width = img.width;
+        console.log('canvas ancho');
+        console.log(canvas.width);
+        console.log(canvas.height);
         ctx.drawImage(img, 0, 0);
         dataURL = canvas.toDataURL(outputFormat);
         callback(dataURL);
@@ -649,7 +653,7 @@ function onPhotoFileSuccess(imageData) {
       image = base64Img;
       console.log('image');
       console.log(image);
-    });
+    },"image/png");
   }
 }
 /*----------------------------------------------------------------------------------------------------------------------
@@ -696,7 +700,7 @@ function onPhotoURISuccess(imageURI) {
       image = base64Img;
       console.log('image');
       console.log(image);
-    });
+    },"image/png");
   }
 }
 /*----------------------------------------------------------------------------------------------------------------------
