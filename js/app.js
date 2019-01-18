@@ -398,6 +398,9 @@ function convertImgToBase64URL(url, callback, outputFormat){
     img.onload = function(){
         var canvas = document.createElement('CANVAS'),
         ctx = canvas.getContext('2d'), dataURL;
+        console.log('img ancho');
+        console.log(img.width);
+        console.log(img.height);
         canvas.height = img.height;
         canvas.width = img.width;
         console.log('canvas ancho');
