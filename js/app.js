@@ -119,6 +119,7 @@ function updateStorage()
   console.log('app.params.template7Data[directorio]');
   //console.log(JSON.stringify(app.params.template7Data['directorio']));
   localStorage.removeItem('directorio');
+  consol.log(2);
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
   console.log('localStorage.getItem(directorio)');
   console.log(localStorage.getItem('directorio'));
@@ -646,19 +647,19 @@ function onPhotoFileSuccess(imageData) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  /*largeImage.onload = function(){
+  largeImage.onload = function(){
     image = getBase64Image(largeImage);
     console.log('image');
     console.log(image);
-  }*/
-  largeImage.onload = function(){
+  }
+  /*largeImage.onload = function(){
     convertImgToBase64URL(uploadimgdata, function(base64Img){
       // Base64DataURL
       image = base64Img;
       console.log('image');
       console.log(image);
     });
-  }
+  }*/
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
@@ -696,16 +697,16 @@ function onPhotoURISuccess(imageURI) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  /*largeImage.onload = function(){image = getBase64Image(largeImage);console.log('image');
-  console.log(image);}*/
-  largeImage.onload = function(){
+  largeImage.onload = function(){image = getBase64Image(largeImage);console.log('image');
+  console.log(image);}
+  /*largeImage.onload = function(){
     convertImgToBase64URL(uploadimgdata, function(base64Img){
       // Base64DataURL
       image = base64Img;
       console.log('image');
       console.log(image);
     });
-  }
+  }*/
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
