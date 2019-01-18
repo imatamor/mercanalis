@@ -391,6 +391,21 @@ function getBase64Image(img) {
   //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   return dataURL;
 }
+function convertImgToBase64URL(url, callback, outputFormat){
+    var img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function(){
+        var canvas = document.createElement('CANVAS'),
+        ctx = canvas.getContext('2d'), dataURL;
+        canvas.height = img.height;
+        canvas.width = img.width;
+        ctx.drawImage(img, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        callback(dataURL);
+        canvas = null; 
+    };
+    img.src = url;
+}
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
 / Use: setFormPage();
@@ -623,8 +638,19 @@ function onPhotoFileSuccess(imageData) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  largeImage.onload = function(){image = getBase64Image(largeImage);console.log('image');
-  console.log(image);}
+  /*largeImage.onload = function(){
+    image = getBase64Image(largeImage);
+    console.log('image');
+    console.log(image);
+  }*/
+  largeImage.onload = function(){
+    convertImgToBase64URL(uploadimgdata, function(base64Img){
+      // Base64DataURL
+      image = base64Img;
+      console.log('image');
+      console.log(image);
+    });
+  }
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
@@ -662,8 +688,16 @@ function onPhotoURISuccess(imageURI) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  largeImage.onload = function(){image = getBase64Image(largeImage);console.log('image');
-  console.log(image);}
+  /*largeImage.onload = function(){image = getBase64Image(largeImage);console.log('image');
+  console.log(image);}*/
+  largeImage.onload = function(){
+    convertImgToBase64URL(uploadimgdata, function(base64Img){
+      // Base64DataURL
+      image = base64Img;
+      console.log('image');
+      console.log(image);
+    });
+  }
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
