@@ -404,7 +404,7 @@ function convertImgToBase64URL(url, callback, outputFormat){
         console.log(canvas.width);
         console.log(canvas.height);
         ctx.drawImage(img, 0, 0);
-        dataURL = canvas.toDataURL(outputFormat);
+        dataURL = canvas.toDataURL("image/png");
         callback(dataURL);
         canvas = null; 
     };
@@ -653,7 +653,7 @@ function onPhotoFileSuccess(imageData) {
       image = base64Img;
       console.log('image');
       console.log(image);
-    },"image/png");
+    });
   }
 }
 /*----------------------------------------------------------------------------------------------------------------------
@@ -700,7 +700,7 @@ function onPhotoURISuccess(imageURI) {
       image = base64Img;
       console.log('image');
       console.log(image);
-    },"image/png");
+    });
   }
 }
 /*----------------------------------------------------------------------------------------------------------------------
