@@ -364,6 +364,10 @@ function getBase64Image(img) {
   var width = img.width;    // Current image width
   var height = img.height;  // Current image height
 
+  console.log(img);
+  console.log(width);
+  console.log(height);
+
   // Check if the current width is larger than the max
   if(width > maxWidth){
     ratio = maxWidth / width;   // get ratio for scaling image
@@ -613,6 +617,8 @@ function onPhotoFileSuccess(imageData) {
     image = myBase64;
   });*/
   image = getBase64Image(largeImage);
+  console.log('image');
+  console.log(image);
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
@@ -651,6 +657,8 @@ function onPhotoURISuccess(imageURI) {
     image = myBase64;
   });*/
   image = getBase64Image(largeImage);
+  console.log('image');
+  console.log(image);
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
