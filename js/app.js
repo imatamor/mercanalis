@@ -376,11 +376,14 @@ function getBase64Image(img) {
     height = height * ratio;    // Reset height to match scaled image
     width = width * ratio;    // Reset width to match scaled image
   }
+  console.log('cambiado el ancho');
+  console.log(width);
+  console.log(height);
   var canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
   var ctx = canvas.getContext("2d");
-  ctx.drawImage(img, width/2, height/2);
+  ctx.drawImage(img, 0, 0);
   var dataURL = canvas.toDataURL("image/png");
   //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   return dataURL;
