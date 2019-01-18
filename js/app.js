@@ -616,7 +616,7 @@ function onPhotoFileSuccess(imageData) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  image = getBase64Image(largeImage);
+  image = getBase64Image(document.getElementById('largeImage'));
   console.log('image');
   console.log(image);
 }
@@ -656,7 +656,7 @@ function onPhotoURISuccess(imageURI) {
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
   });*/
-  image = getBase64Image(largeImage);
+  image = getBase64Image(document.getElementById('largeImage'));
   console.log('image');
   console.log(image);
 }
