@@ -382,6 +382,9 @@ function getBase64Image(img) {
   var canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
+  console.log('canvas ancho');
+  console.log(canvas.width);
+  console.log(canvas.height);
   var ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0);
   var dataURL = canvas.toDataURL("image/png");
