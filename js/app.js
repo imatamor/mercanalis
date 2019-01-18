@@ -640,18 +640,18 @@ function onPhotoFileSuccess(imageData) {
   //
   largeImage.src  = imageData;
   uploadimgdata   = imageData;
-  /*$('.feedback_form').html("Procesando imagen...");
+  $('.feedback_form').html("Procesando imagen...");
   app.preloader.show();
   toDataUrl(uploadimgdata, function(myBase64) {
     app.preloader.hide();
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
-  });*/
-  largeImage.onload = function(){
+  });
+  /*largeImage.onload = function(){
     image = getBase64Image(largeImage);
     console.log('image');
     console.log(image);
-  }
+  }*/
   /*largeImage.onload = function(){
     convertImgToBase64URL(uploadimgdata, function(base64Img){
       // Base64DataURL
@@ -690,15 +690,15 @@ function onPhotoURISuccess(imageURI) {
 
   largeImage.src  = imageURI;
   uploadimgdata   = imageURI;
-  /*$('.feedback_form').html("Procesando imagen...");
+  $('.feedback_form').html("Procesando imagen...");
   app.preloader.show();
   toDataUrl(uploadimgdata, function(myBase64) {
     app.preloader.hide();
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
-  });*/
-  largeImage.onload = function(){image = getBase64Image(largeImage);console.log('image');
-  console.log(image);}
+  });
+  /*largeImage.onload = function(){image = getBase64Image(largeImage);console.log('image');
+  console.log(image);}*/
   /*largeImage.onload = function(){
     convertImgToBase64URL(uploadimgdata, function(base64Img){
       // Base64DataURL
