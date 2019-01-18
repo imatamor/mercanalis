@@ -605,13 +605,14 @@ function onPhotoFileSuccess(imageData) {
   //
   largeImage.src  = imageData;
   uploadimgdata   = imageData;
-  $('.feedback_form').html("Procesando imagen...");
+  /*$('.feedback_form').html("Procesando imagen...");
   app.preloader.show();
   toDataUrl(uploadimgdata, function(myBase64) {
     app.preloader.hide();
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
-  });
+  });*/
+  image = getBase64Image(largeImage);
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
@@ -642,13 +643,14 @@ function onPhotoURISuccess(imageURI) {
 
   largeImage.src  = imageURI;
   uploadimgdata   = imageURI;
-  $('.feedback_form').html("Procesando imagen...");
+  /*$('.feedback_form').html("Procesando imagen...");
   app.preloader.show();
   toDataUrl(uploadimgdata, function(myBase64) {
     app.preloader.hide();
     $('.feedback_form').html("Imagen procesada.");
     image = myBase64;
-  });
+  });*/
+  image = getBase64Image(largeImage);
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: removeRequire
