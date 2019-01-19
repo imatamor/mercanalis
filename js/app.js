@@ -125,6 +125,7 @@ function initDatabase() {
     });*/
 }
 
+onDeviceReady();
 
 function onDeviceReady() {
   console.log('jjjjjjj');
