@@ -398,7 +398,7 @@ function saveElector(type)
                 console.log(resultSet);
             },function(error) {
                 console.log('sql insert error');
-                console.log(error);
+                console.log(error.message);
             });
         });
         console.log('sql lite afuera');
