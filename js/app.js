@@ -111,10 +111,10 @@ document.addEventListener("deviceready", function(){
 //initDatabase();
 
 function initDatabase() {
-    database = window.sqlitePlugin.openDatabase({name: 'mercanalis.db', location: 'default'});
+    database = window.sqlitePlugin.openDatabase({name: 'mercanalis.db'});
 
     database.transaction(function(transaction) {
-        transaction.executeSql('CREATE TABLE IF NOT EXISTS directorio (id integer primary key autoincrement,usuario ,nombre ,apellido ,cedula ,fecha_nacimiento ,nombre_carnet ,nombre_familia ,ciudad ,canton ,parroquia ,barrio ,sector ,direccion ,estado_civil ,numero_hijos ,tiene_discapacidad ,discapacidad ,ocupacion ,profesion ,nivel_escolaridad ,capacitacion_deseada ,tiene_bono_gobierno ,tiene_bono_municipio ,telefono_convencional ,telefono_celular ,telefono_compania ,tiene_whatsapp ,whatsapp ,tiene_facebook ,facebook ,tiene_instagram ,instagram ,tiene_twitter ,twitter ,correo_electronico ,tiene_casa_propia ,tiene_vehiculo ,placa ,seguro_medico ,credito_agricola ,otros ,numero_contrato ,image ,uploaded ,creado ,editado ,borrado)', [],
+        transaction.executeSql('CREATE TABLE IF NOT EXISTS directorio (id integer primary key autoincrement,usuario text,nombre text,apellido text,cedula text,fecha_nacimiento date,nombre_carnet text,nombre_familia text,ciudad text,canton text,parroquia text,barrio text,sector text,direccion text,estado_civil text,numero_hijos integer,tiene_discapacidad text,discapacidad text,ocupacion text,profesion text,nivel_escolaridad text,capacitacion_deseada text,tiene_bono_gobierno text,tiene_bono_municipio text,telefono_convencional text,telefono_celular text,telefono_compania text,tiene_whatsapp text,whatsapp text,tiene_facebook text,facebook text,tiene_instagram text,instagram text,tiene_twitter text,twitter text,correo_electronico text,tiene_casa_propia text,tiene_vehiculo text,placa text,seguro_medico text,credito_agricola text,otros text,numero_contrato text,image text,uploaded boolean,creado date,editado date,borrado date)', [],
         function(tx, result) {
           alert("Table created successfully");
         },
