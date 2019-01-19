@@ -20,7 +20,10 @@ var app  = new Framework7({
       //console.log(app.params.template7Data);
       //console.log(page.name);
       if(page.name == "home")
+      {
         setHomePage();
+        onDeviceReady()
+      }
       else if(page.name == "form")
         setFormPage();
       else if(page.name == "elector")
@@ -125,7 +128,7 @@ function initDatabase() {
     });*/
 }
 
-onDeviceReady();
+//onDeviceReady();
 
 function onDeviceReady() {
   console.log('jjjjjjj');
