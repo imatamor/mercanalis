@@ -118,7 +118,7 @@ function updateStorage()
 {
   console.log('app.params.template7Data[directorio]');
   //console.log(JSON.stringify(app.params.template7Data['directorio']));
-  localStorage.removeItem('directorio');
+  localStorage.removeItem(directorio);
   consol.log(2);
   localStorage.setItem('directorio', JSON.stringify(app.params.template7Data['directorio']));
   console.log('localStorage.getItem(directorio)');
