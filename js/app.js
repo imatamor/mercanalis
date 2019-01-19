@@ -106,24 +106,53 @@ document.addEventListener("deviceready", function(){
     // Initialize the database after the Cordova is ready.
     console.log('deviceready');
     initDatabase();
+    onDeviceReady();
 });
 
 //initDatabase();
 
 function initDatabase() {
-    database = window.sqlitePlugin.openDatabase({name: 'mercanalis.db'});
+   /* database = window.sqlitePlugin.openDatabase({name: 'mercanalis.db', location: 'default'});
 
     database.transaction(function(transaction) {
-        transaction.executeSql('CREATE TABLE IF NOT EXISTS directorio (id integer primary key autoincrement,usuario text,nombre text,apellido text,cedula text,fecha_nacimiento date,nombre_carnet text,nombre_familia text,ciudad text,canton text,parroquia text,barrio text,sector text,direccion text,estado_civil text,numero_hijos integer,tiene_discapacidad text,discapacidad text,ocupacion text,profesion text,nivel_escolaridad text,capacitacion_deseada text,tiene_bono_gobierno text,tiene_bono_municipio text,telefono_convencional text,telefono_celular text,telefono_compania text,tiene_whatsapp text,whatsapp text,tiene_facebook text,facebook text,tiene_instagram text,instagram text,tiene_twitter text,twitter text,correo_electronico text,tiene_casa_propia text,tiene_vehiculo text,placa text,seguro_medico text,credito_agricola text,otros text,numero_contrato text,image text,uploaded boolean,creado date,editado date,borrado date)', [],
+        transaction.executeSql('CREATE TABLE IF NOT EXISTS directorio (id integer primary key autoincrement,usuario ,nombre ,apellido ,cedula ,fecha_nacimiento ,nombre_carnet ,nombre_familia ,ciudad ,canton ,parroquia ,barrio ,sector ,direccion ,estado_civil ,numero_hijos ,tiene_discapacidad ,discapacidad ,ocupacion ,profesion ,nivel_escolaridad ,capacitacion_deseada ,tiene_bono_gobierno ,tiene_bono_municipio ,telefono_convencional ,telefono_celular ,telefono_compania ,tiene_whatsapp ,whatsapp ,tiene_facebook ,facebook ,tiene_instagram ,instagram ,tiene_twitter ,twitter ,correo_electronico ,tiene_casa_propia ,tiene_vehiculo ,placa ,seguro_medico ,credito_agricola ,otros ,numero_contrato ,image ,uploaded ,creado ,editado ,borrado)', [],
         function(tx, result) {
           alert("Table created successfully");
         },
         function(error) {
           alert("Error occurred while creating the table.");
         });
-    });
+    });*/
 }
 
+
+function onDeviceReady() {
+  var db = window.sqlitePlugin.openDatabase({name: "my.db"});
+ 
+  db.transaction(function(tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
+ 
+    // demonstrate PRAGMA:
+    db.executeSql("pragma table_info (test_table);", [], function(res) {
+      console.log("PRAGMA res: " + JSON.stringify(res));
+    });
+ 
+    tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], function(tx, res) {
+      console.log("insertId: " + res.insertId + " -- probably 1");
+      console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+ 
+      db.transaction(function(tx) {
+        tx.executeSql("select count(id) as cnt from test_table;", [], function(tx, res) {
+          console.log("res.rows.length: " + res.rows.length + " -- should be 1");
+          console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
+        });
+      });
+ 
+    }, function(e) {
+      console.log("ERROR: " + e.message);
+    });
+  });
+}
 //----------------------------------------------------------------------------------------------------------------------
 
 $$('#my-login-screen .login-button').on('click', function () {
@@ -393,7 +422,7 @@ function saveElector(type)
 
 
         database.transaction(function(transaction) {
-            transaction.executeSql("INSERT INTO directorio (id,usuario ,nombre ,apellido ,cedula ,fecha_nacimiento ,nombre_carnet ,nombre_familia ,ciudad ,canton ,parroquia ,barrio ,sector ,direccion ,estado_civil ,numero_hijos ,tiene_discapacidad ,discapacidad ,ocupacion ,profesion ,nivel_escolaridad ,capacitacion_deseada ,tiene_bono_gobierno ,tiene_bono_municipio ,telefono_convencional ,telefono_celular ,telefono_compania ,tiene_whatsapp ,whatsapp ,tiene_facebook ,facebook ,tiene_instagram ,instagram ,tiene_twitter ,twitter ,correo_electronico ,tiene_casa_propia ,tiene_vehiculo ,placa ,seguro_medico ,credito_agricola ,otros ,numero_contrato ,image ,uploaded ,creado ,editado ,borrado) VALUES (null, '"+ encuestador +"','"+ nombre +"','" + apellido +"','"+ cedula +"','"+ fecha_nacimiento +"','"+ nombre_carnet +"','"+ nombre_familia +"','"+ ciudad +"','"+ canton +"','"+ parroquia +"','"+ barrio +"','"+ sector +"','"+ direccion +"','"+ estado_civil +"','"+ numero_hijos +"','"+ tiene_discapacidad +"','"+ discapacidad +"','"+ ocupacion +"','"+ profesion +"','"+ nivel_escolaridad +"','"+ capacitacion_deseada +"','"+ tiene_bono_gobierno +"','"+ tiene_bono_municipio +"','"+ telefono_convencional +"','"+ telefono_celular +"','"+ telefono_compania +"','"+ tiene_whatsapp +"','"+ whatsapp +"','"+ tiene_facebook +"','"+ facebook +"','"+ tiene_instagram +"','"+ instagram +"','"+ tiene_twitter +"','"+ twitter +"','"+ correo_electronico +"','"+ tiene_casa_propia +"','"+ tiene_vehiculo +"','"+ placa +"','"+ seguro_medico +"','"+ credito_agricola +"','"+ otros +"','"+ numero_contrato +"','"+ image +"', 0 ,'"+ new Date().toISOString().slice(0, 19).replace('T', ' ') +",null,null)", [], function(ignored, resultSet) {
+            transaction.executeSql("INSERT INTO directorio (id,usuario ,nombre ,apellido ,cedula ,fecha_nacimiento ,nombre_carnet ,nombre_familia ,ciudad ,canton ,parroquia ,barrio ,sector ,direccion ,estado_civil ,numero_hijos ,tiene_discapacidad ,discapacidad ,ocupacion ,profesion ,nivel_escolaridad ,capacitacion_deseada ,tiene_bono_gobierno ,tiene_bono_municipio ,telefono_convencional ,telefono_celular ,telefono_compania ,tiene_whatsapp ,whatsapp ,tiene_facebook ,facebook ,tiene_instagram ,instagram ,tiene_twitter ,twitter ,correo_electronico ,tiene_casa_propia ,tiene_vehiculo ,placa ,seguro_medico ,credito_agricola ,otros ,numero_contrato ,image ,uploaded ,creado ,editado ,borrado) VALUES ('null', '"+ encuestador +"','"+ nombre +"','" + apellido +"','"+ cedula +"','"+ fecha_nacimiento +"','"+ nombre_carnet +"','"+ nombre_familia +"','"+ ciudad +"','"+ canton +"','"+ parroquia +"','"+ barrio +"','"+ sector +"','"+ direccion +"','"+ estado_civil +"','"+ numero_hijos +"','"+ tiene_discapacidad +"','"+ discapacidad +"','"+ ocupacion +"','"+ profesion +"','"+ nivel_escolaridad +"','"+ capacitacion_deseada +"','"+ tiene_bono_gobierno +"','"+ tiene_bono_municipio +"','"+ telefono_convencional +"','"+ telefono_celular +"','"+ telefono_compania +"','"+ tiene_whatsapp +"','"+ whatsapp +"','"+ tiene_facebook +"','"+ facebook +"','"+ tiene_instagram +"','"+ instagram +"','"+ tiene_twitter +"','"+ twitter +"','"+ correo_electronico +"','"+ tiene_casa_propia +"','"+ tiene_vehiculo +"','"+ placa +"','"+ seguro_medico +"','"+ credito_agricola +"','"+ otros +"','"+ numero_contrato +"','"+ image +"', 0 ,'"+ new Date().toISOString().slice(0, 19).replace('T', ' ') +",'null','null')", [], function(ignored, resultSet) {
                 console.log('sql insert');
                 console.log(resultSet);
             },function(error) {
