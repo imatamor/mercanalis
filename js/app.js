@@ -108,7 +108,7 @@ document.addEventListener("deviceready", function(){
     initDatabase();
 });
 
-initDatabase();
+//initDatabase();
 
 function initDatabase() {
     database = window.sqlitePlugin.openDatabase({name: 'mercanalis.db', location: 'default'});
