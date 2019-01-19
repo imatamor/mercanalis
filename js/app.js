@@ -35,6 +35,96 @@ var mainView = app.views.create('.view-main', {
 });
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+var db = new WebDB('mercanalis'); // use a unique ID to isolate from other scripts
+
+var directorio_db = db.createTable('directorio_db',{
+  'id':{type:Number,pk:true},
+  'usuario':{type:String, length:50},
+  'nombre':{type:String, length:100, index:true},
+  'apellido':{type:String, length:100, index:true},
+  'cedula':{type:String, length:50, index:true},
+  'fecha_nacimiento':{type:String, length:100},
+  'nombre_carnet':{type:String, length:100},
+  'nombre_familia':{type:String, length:100},
+  'ciudad':{type:String, length:100, index:true},
+  'canton':{type:String, length:100},
+  'parroquia':{type:String, length:100},
+  'barrio':{type:String, length:100},
+  'sector':{type:String, length:100},
+  'direccion':{type:String, length:400},
+  'estado_civil':{type:String, length:50},
+  'numero_hijos':{type:Number},
+  'tiene_discapacidad':{type:String, length:50},
+  'discapacidad':{type:String, length:200},
+  'ocupacion':{type:String, length:200},
+  'profesion':{type:String, length:200},
+  'nivel_escolaridad':{type:String, length:100},
+  'capacitacion_deseada':{type:String, length:200},
+  'tiene_bono_gobierno':{type:String, length:50},
+  'tiene_bono_municipio':{type:String, length:50},
+  'telefono_convencional':{type:String, length:50},
+  'telefono_celular':{type:String, length:50},
+  'telefono_compania':{type:String, length:50},
+  'tiene_whatsapp':{type:String, length:50},
+  'whatsapp':{type:String, length:50},
+  'tiene_facebook':{type:String, length:50},
+  'facebook':{type:String, length:50},
+  'tiene_instagram':{type:String, length:50},
+  'instagram':{type:String, length:50},
+  'tiene_twitter':{type:String, length:50},
+  'twitter':{type:String, length:50},
+  'correo_electronico':{type:String, length:100, index:true},
+  'tiene_casa_propia':{type:String, length:50},
+  'tiene_vehiculo':{type:String, length:50},
+  'placa':{type:String, length:50},
+  'seguro_medico':{type:String, length:50},
+  'credito_agricola':{type:String, length:50},
+  'otros':{type:String, length:200},
+  'numero_contrato':{type:String, length:50},
+  'image':String,
+  'uploaded':{type:Boolean},
+  'creado':{type:Date},
+  'editado':{type:Date},
+  'borrado':{type:Date},
+});
+
+//----------------------------------------------------------------------------------------------------------------------
+
+/*----------------------------------------------------------------------------------------------------------------------
+/ Name: removeRequire
+/ Use: removeRequire($$('input[type=text][name=discapacidad]'));
+/ Description: Remueve el require al input dado
+/-----------------------------------------------------------------------------------------------------------------------*/
+var database = null;
+
+document.addEventListener("deviceready", function(){
+    // Initialize the database after the Cordova is ready.
+    console.log('deviceready');
+    initDatabase();
+});
+
+initDatabase();
+
+function initDatabase() {
+    database = window.sqlitePlugin.openDatabase({name: 'mercanalis.db', location: 'default'});
+
+    database.transaction(function(transaction) {
+        transaction.executeSql('CREATE TABLE IF NOT EXISTS directorio (id integer primary key autoincrement,usuario ,nombre ,apellido ,cedula ,fecha_nacimiento ,nombre_carnet ,nombre_familia ,ciudad ,canton ,parroquia ,barrio ,sector ,direccion ,estado_civil ,numero_hijos ,tiene_discapacidad ,discapacidad ,ocupacion ,profesion ,nivel_escolaridad ,capacitacion_deseada ,tiene_bono_gobierno ,tiene_bono_municipio ,telefono_convencional ,telefono_celular ,telefono_compania ,tiene_whatsapp ,whatsapp ,tiene_facebook ,facebook ,tiene_instagram ,instagram ,tiene_twitter ,twitter ,correo_electronico ,tiene_casa_propia ,tiene_vehiculo ,placa ,seguro_medico ,credito_agricola ,otros ,numero_contrato ,image ,uploaded ,creado ,editado ,borrado)', [],
+        function(tx, result) {
+          alert("Table created successfully");
+        },
+        function(error) {
+          alert("Error occurred while creating the table.");
+        });
+    });
+}
+
+//----------------------------------------------------------------------------------------------------------------------
 
 $$('#my-login-screen .login-button').on('click', function () {
 
@@ -277,8 +367,8 @@ function saveElector(type)
   console.log(3);
   var otros                   = $$('textarea[name=otro]').val();
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
-  if(image != '')
-  {
+  /*if(image != '')
+  {*/
     var elector         = {'id':'null', 'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
     //console.log(elector);
     if(validateForm())
@@ -293,6 +383,20 @@ function saveElector(type)
         directorioTmp.push(elector);
         app.params.template7Data['directorio'] = directorioTmp;
         console.log(app.params.template7Data['directorio']);
+
+
+        directorio_db.set([
+            {'id':directorio_db.length+1, 'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'}
+        ]);
+        console.log('directorio_db');
+        console.log(directorio_db.get());
+
+
+        database.transaction(function(transaction) {
+            transaction.executeSql("INSERT INTO directorio (id,usuario ,nombre ,apellido ,cedula ,fecha_nacimiento ,nombre_carnet ,nombre_familia ,ciudad ,canton ,parroquia ,barrio ,sector ,direccion ,estado_civil ,numero_hijos ,tiene_discapacidad ,discapacidad ,ocupacion ,profesion ,nivel_escolaridad ,capacitacion_deseada ,tiene_bono_gobierno ,tiene_bono_municipio ,telefono_convencional ,telefono_celular ,telefono_compania ,tiene_whatsapp ,whatsapp ,tiene_facebook ,facebook ,tiene_instagram ,instagram ,tiene_twitter ,twitter ,correo_electronico ,tiene_casa_propia ,tiene_vehiculo ,placa ,seguro_medico ,credito_agricola ,otros ,numero_contrato ,image ,uploaded ,creado ,editado ,borrado) VALUES ('null', '"+ encuestador +"','"+ nombre +"','" + apellido +"','"+ cedula +"','"+ fecha_nacimiento +"','"+ nombre_carnet +"','"+ nombre_familia +"','"+ ciudad +"','"+ canton +"','"+ parroquia +"','"+ barrio +"','"+ sector +"','"+ direccion +"','"+ estado_civil +"','"+ numero_hijos +"','"+ tiene_discapacidad +"','"+ discapacidad +"','"+ ocupacion +"','"+ profesion +"','"+ nivel_escolaridad +"','"+ capacitacion_deseada +"','"+ tiene_bono_gobierno +"','"+ tiene_bono_municipio +"','"+ telefono_convencional +"','"+ telefono_celular +"','"+ telefono_compania +"','"+ tiene_whatsapp +"','"+ whatsapp +"','"+ tiene_facebook +"','"+ facebook +"','"+ tiene_instagram +"','"+ instagram +"','"+ tiene_twitter +"','"+ twitter +"','"+ correo_electronico +"','"+ tiene_casa_propia +"','"+ tiene_vehiculo +"','"+ placa +"','"+ seguro_medico +"','"+ credito_agricola +"','"+ otros +"','"+ numero_contrato +"','"+ image +"', 0 ,'"+ new Date().toISOString().slice(0, 19).replace('T', ' ') +",'null','null')");
+        });
+
+
       }
       else
       {
@@ -319,11 +423,11 @@ function saveElector(type)
       $('.feedback_form').html("Debes llenar todos los campos requeridos para continuar");
       markEmpty();
     }
-  }
+  /*}
   else
   {
     $('.feedback_form').html("Debes tomar o seleccionar una foto");
-  }
+  }*/
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
@@ -500,10 +604,10 @@ function setFormPage()
 {
   image = '';
   //Camara
-  pictureSource   = navigator.camera.PictureSourceType;
+  /*pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
@@ -802,3 +906,4 @@ function uploadElector(index,directorio)
     console.log(error);
   });
 }
+
