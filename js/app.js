@@ -396,6 +396,15 @@ function saveElector(type)
             transaction.executeSql("INSERT INTO directorio (id,usuario ,nombre ,apellido ,cedula ,fecha_nacimiento ,nombre_carnet ,nombre_familia ,ciudad ,canton ,parroquia ,barrio ,sector ,direccion ,estado_civil ,numero_hijos ,tiene_discapacidad ,discapacidad ,ocupacion ,profesion ,nivel_escolaridad ,capacitacion_deseada ,tiene_bono_gobierno ,tiene_bono_municipio ,telefono_convencional ,telefono_celular ,telefono_compania ,tiene_whatsapp ,whatsapp ,tiene_facebook ,facebook ,tiene_instagram ,instagram ,tiene_twitter ,twitter ,correo_electronico ,tiene_casa_propia ,tiene_vehiculo ,placa ,seguro_medico ,credito_agricola ,otros ,numero_contrato ,image ,uploaded ,creado ,editado ,borrado) VALUES ('null', '"+ encuestador +"','"+ nombre +"','" + apellido +"','"+ cedula +"','"+ fecha_nacimiento +"','"+ nombre_carnet +"','"+ nombre_familia +"','"+ ciudad +"','"+ canton +"','"+ parroquia +"','"+ barrio +"','"+ sector +"','"+ direccion +"','"+ estado_civil +"','"+ numero_hijos +"','"+ tiene_discapacidad +"','"+ discapacidad +"','"+ ocupacion +"','"+ profesion +"','"+ nivel_escolaridad +"','"+ capacitacion_deseada +"','"+ tiene_bono_gobierno +"','"+ tiene_bono_municipio +"','"+ telefono_convencional +"','"+ telefono_celular +"','"+ telefono_compania +"','"+ tiene_whatsapp +"','"+ whatsapp +"','"+ tiene_facebook +"','"+ facebook +"','"+ tiene_instagram +"','"+ instagram +"','"+ tiene_twitter +"','"+ twitter +"','"+ correo_electronico +"','"+ tiene_casa_propia +"','"+ tiene_vehiculo +"','"+ placa +"','"+ seguro_medico +"','"+ credito_agricola +"','"+ otros +"','"+ numero_contrato +"','"+ image +"', 0 ,'"+ new Date().toISOString().slice(0, 19).replace('T', ' ') +",'null','null')");
         });
 
+        database.transaction(function(transaction) {
+            transaction.executeSql('SELECT * FROM directorio', [], function(ignored, resultSet) {
+                console.log('sql lite');
+                console.log(resultSet);
+                console.log(resultSet.rows);
+            });
+        }, function(error) {
+            alert('SELECT count error: ' + error.message);
+        });
 
       }
       else
