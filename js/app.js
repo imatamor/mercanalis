@@ -127,6 +127,7 @@ function initDatabase() {
 
 
 function onDeviceReady() {
+  console.log('jjjjjjj');
   var db = window.sqlitePlugin.openDatabase({name: "my.db"});
  
   db.transaction(function(tx) {
