@@ -130,7 +130,7 @@ $$(document).on('page:init', '.page[data-name="directorio"]', function (e) {
   var directorio = [];
   for (var i = 0; i < app.params.template7Data['directorio'].length; i++) {
     if(app.params.template7Data['directorio'][i].borrado == null || app.params.template7Data['directorio'][i].borrado == 'null')
-    directorio.push(app.params.template7Data['directorio'][i]);
+      directorio.push(app.params.template7Data['directorio'][i]);
   }
   var virtualList = app.virtualList.create({
     el: '.virtual-list',
@@ -274,8 +274,8 @@ function saveElector(type)
   console.log(3);
   var otros                   = $$('textarea[name=otro]').val();
   var numero_contrato         = $$('input[type=text][name=numero_contrato]').val();
-  if(image != '')
-  {
+  //if(image != '')
+  //{
     var elector         = {'id':'null', 'usuario':encuestador,'nombre': nombre,'apellido': apellido,'cedula': cedula,'fecha_nacimiento': fecha_nacimiento,'nombre_carnet': nombre_carnet,'nombre_familia': nombre_familia,'ciudad': ciudad,'canton': canton,'parroquia': parroquia,'barrio': barrio,'sector': sector,'direccion': direccion,'estado_civil': estado_civil,'numero_hijos': numero_hijos,'tiene_discapacidad': tiene_discapacidad,'discapacidad': discapacidad,'ocupacion': ocupacion,'profesion': profesion,'nivel_escolaridad': nivel_escolaridad,'capacitacion_deseada': capacitacion_deseada,'tiene_bono_gobierno': tiene_bono_gobierno,'tiene_bono_municipio': tiene_bono_municipio,'telefono_convencional': telefono_convencional,'telefono_celular': telefono_celular,'telefono_compania': telefono_compania,'tiene_whatsapp': tiene_whatsapp,'whatsapp': whatsapp,'tiene_facebook': tiene_facebook,'facebook': facebook,'tiene_instagram': tiene_instagram,'instagram': instagram,'tiene_twitter': tiene_twitter,'twitter': twitter,'correo_electronico': correo_electronico,'tiene_casa_propia': tiene_casa_propia,'tiene_vehiculo': tiene_vehiculo,'placa': placa,'seguro_medico': seguro_medico,'credito_agricola': credito_agricola,'otros': otros,'numero_contrato': numero_contrato,'image': image,'uploaded': 0,'creado': new Date().toISOString().slice(0, 19).replace('T', ' '),'editado': 'null','borrado': 'null'};
     //console.log(elector);
     if(validateForm())
@@ -313,11 +313,11 @@ function saveElector(type)
       $('.feedback_form').html("Debes llenar todos los campos requeridos para continuar");
       markEmpty();
     }
-  }
+  /*}
   else
   {
     $('.feedback_form').html("Debes tomar o seleccionar una foto");
-  }
+  }*/
 }
 /*----------------------------------------------------------------------------------------------------------------------
 / Name: setFormPage
@@ -494,10 +494,10 @@ function setFormPage()
 {
   image = '';
   //Camara
-  pictureSource   = navigator.camera.PictureSourceType;
+  /*pictureSource   = navigator.camera.PictureSourceType;
   destinationType = navigator.camera.DestinationType;
   $('#take_picture').click(capturePhotoWithFile);
-  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});
+  $('#select_gallery').click(function(){getPhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);});*/
   //Calendario Fecha de nacimiento
   create_birthdate_calendar();
   //Input de discapacidad
