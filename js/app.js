@@ -18,11 +18,12 @@ var app  = new Framework7({
   on: {
     pageInit(page) {
       //console.log(app.params.template7Data);
-      //console.log(page.name);
+      console.log(page.name);
       if(page.name == "home")
       {
+        console.log('entro');
+        onDeviceReady();
         setHomePage();
-        onDeviceReady()
       }
       else if(page.name == "form")
         setFormPage();
